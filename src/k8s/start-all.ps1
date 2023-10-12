@@ -56,4 +56,6 @@ kubectl apply `
     -f ./customermanagementapi-svc.yaml `
     -f ./vehiclemanagementapi$meshPostfix.yaml `
     -f ./workshopmanagementapi$meshPostfix.yaml `
-    -f ./webapp$meshPostfix.yaml
+    -f ./webapp$meshPostfix.yaml `
+    -f https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml `
+    -f https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml
