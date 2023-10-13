@@ -258,3 +258,5 @@ out/
 # local nuget folder
 nuget/
 
+#secret
+secret.yaml
