@@ -9,6 +9,8 @@ spec:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
+  - name: image-reference
+    type: string
   workspaces:
   - name: shared-data
     description: | 
@@ -16,6 +18,7 @@ spec:
       next task.
   - name: git-secret
     description: SSH key for git repo access.
+  - name: docker-credentials
   tasks:
   - name: fetch-source
     taskRef:
@@ -28,10 +31,22 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
-  - name: show-readme
+  # - name: show-readme
+  #   runAfter: ["fetch-source"]
+  #   taskRef:
+  #     name: show-readme
+  #   workspaces:
+  #   - name: source
+  #     workspace: shared-data
+  - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
-      name: show-readme
+      name: kaniko
     workspaces:
     - name: source
       workspace: shared-data
+    - name: dockerconfig
+      workspace: docker-credentials
+    params:
+    - name: IMAGE
+      value: $(params.image-reference)

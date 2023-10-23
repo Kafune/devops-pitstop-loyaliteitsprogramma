@@ -21,6 +21,11 @@ spec:
   - name: git-secret
     secret:
       secretName: git-secret
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
   params:
   - name: repo-url
     value: git@github.com:hanaim-devops/pitstop-groep-d.git
+  - name: image-reference
+    value: docker.io/kafune/unit-testing-using-dotnet-test-postgres/general:bp-test
