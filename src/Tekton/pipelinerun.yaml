@@ -3,6 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: clone-read-run-
 spec:
+  serviceAccountName: git-service-account
   pipelineRef:
     name: clone-read
   podTemplate:
@@ -17,9 +18,9 @@ spec:
         resources:
           requests:
             storage: 1Gi
-  - name: git-credentials
+  - name: git-secret
     secret:
       secretName: git-secret
   params:
   - name: repo-url
-    value: https://github.com/EdwinVW/pitstop.git
+    value: git@github.com:hanaim-devops/pitstop-groep-d.git
