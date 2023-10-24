@@ -158,7 +158,6 @@ Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algem
 
 ```mermaid
 C4Context
-      title System Context diagram for Pitstop
         Person(EmployeeA, "Employee", "Employee working for pitstop")
 
         System(SystemA, "System pitstop webapp", "")
@@ -195,8 +194,6 @@ C4Context
 
 ```mermaid
 C4Container
-    title Vehicle management
-
     Container_Boundary(c1, "Vehicle managment") {
         ContainerDb(DatabaseA, Database, "")
         Container(SystemA, API, "")
@@ -209,4 +206,30 @@ C4Container
     Rel_R(SystemA, DatabaseA, "Queries")
     Rel_D(SystemA, SystemC, "Uses")
 
+```
+
+### Workshop management
+
+```mermaid
+C4Container
+    System_Ext(SystemB, Pitstop Web APP, "")
+
+    Container_Boundary(c1, "Workshop managment") {
+        Container(SystemA, API, "")
+        Container(SystemD, EventHandler, "")
+        ContainerDb(DatabaseA, Event store, "")
+        ContainerDb(DatabaseB, Read models, "")
+    }
+
+    Rel_D(SystemA, DatabaseA, "Queries")
+    Rel_D(SystemA, DatabaseB, "Queries")
+    Rel_D(SystemD, DatabaseB, "Queries")
+    Rel(SystemB, SystemA, "Request from")
+
+    System_Ext(SystemC, Message Broker, "")
+
+    Rel_D(SystemA, SystemC, "Uses")
+    Rel_D(SystemC, SystemD, "Uses")
+    
+    UpdateLayoutConfig($c4ShapeInRow="2")
 ```
