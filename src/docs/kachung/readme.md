@@ -6,22 +6,32 @@ Je schrapt verder deze tekst en vervangt alle andere template zaken, zodat allee
  
 Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
 
-- Configuratie van Tekton. Gelukt om huidige git repo te pullen, volgende stap is het bouwen van een docker image.
-- 
+<<<<<<< Updated upstream
+=======
+- User story Build for failure als loyaliteitssysteem eruit ligt
 
+>>>>>>> Stashed changes
 ## 1. Code/platform bijdrage
 
 Competenties: *DevOps-1 Continuous Delivery*
 
 Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure specialist (Ops). Als Developer beschrijf en geef je links van minimaal 2 en maximaal 4 grootste bijdrages qua code functionaliteiten of non-functionele requirements. Idealiter werk je TDD (dus ook commit van tests en bijbehorende code tegelijk), maar je kunt ook linken naar geschreven automatische tests (unit tests, acceptance tests (BDD), integratie tests, end to end tests, performance/load tests, etc.). Als Opser geef je je minimaal 2 maximaal 4 belangrijkste bijdragen aan het opzetten van het Kubernetes platform, achterliggende netwerk infrastructuur of configuration management (MT) buiten Kubernetes (en punt 2).
- 
+
+- Aanmaken API Loyaliteitssysteem met ASP.net Core.
+- Aanmaken Models en DBContext voor gebruik EFCore.
+
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
 Competenties: *DevOps-2 Orchestration, Containerization*
  
 Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
 
-- Tekton YAML
+<<<<<<< Updated upstream
+- Tekton YAML bestanden aanmaken voor het pullen van een git repo. Latere stappen nog uitvoeren (bijvoorbeeld docker image pushen naar Docker Registry)
+=======
+- Configuratie van Tekton CI/CD. Gelukt om huidige git repo te pullen, maar nog kijken wat ik er verder mee kan doen.
+
+>>>>>>> Stashed changes
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
