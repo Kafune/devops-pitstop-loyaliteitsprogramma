@@ -19,6 +19,8 @@ Competenties: *DevOps-2 Orchestration, Containerization*
  
 Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
 
+Ik heb gewerkt aan het verwerken van Ingress
+
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
 Competenties: *DevOps-1 - Continuous Delivery*, *DevOps-3 GitOps*, *DevOps-5 - SlackOps*
