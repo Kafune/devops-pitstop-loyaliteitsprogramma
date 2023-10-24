@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace LoyalitySystemAPI.Controllers
 {
     [ApiController]

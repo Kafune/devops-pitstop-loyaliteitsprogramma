@@ -7,6 +7,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var sqlConnectionString = builder.Configuration.GetConnectionString("LoyaltyServiceCN");
+builder.Services.AddDbContext<LoyaltyContext>(options => options.UseSqlServer(sqlConnectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

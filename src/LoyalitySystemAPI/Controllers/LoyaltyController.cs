@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LoyalitySystemAPI.Controllers
 {
@@ -8,11 +6,17 @@ namespace LoyalitySystemAPI.Controllers
     [ApiController]
     public class LoyaltyController : ControllerBase
     {
+        LoyaltyContext _dbContext;
+         
+        public LoyaltyController(LoyaltyContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         // GET: api/<LoyaltyController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
         // GET api/<LoyaltyController>/5
