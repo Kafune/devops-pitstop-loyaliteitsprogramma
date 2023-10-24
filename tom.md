@@ -48,6 +48,8 @@ ONDERZOEK INFLUXDB
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
 Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste *review acties* die je gedaan hebt, bijvoorbeeld pull requests incl. opmerkingen. Het interessantst zijn natuurlijk gevallen waar code niet optimaal was. Zorg dat je minstens een aantal reviews hebt waar in gitlab voor een externe de kwestie ook duidelijk is, in plaats van dat je dit altijd mondeling binnen het team oplost.
+
+DOEN VAN REVIEWS VAN PULL REQUESTS
  
 ## 6. Bijdrage documentatie
 
