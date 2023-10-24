@@ -52,6 +52,8 @@ Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste *review a
 Competenties: *DevOps-6 Onderzoek*
 
 Zet hier een links naar en geef beschrijving van je C4 diagram of diagrammen, README of andere markdown bestanden, ADR's of andere documentatie. Bij andere markdown bestanden of doumentatie kun je denken aan eigen proces documentatie, zoals code standaarden, commit- of branchingconventies. Tot slot ook user stories en acceptatiecriteria (hopelijk verwerkt in gitlab issues en vertaalt naar `.feature` files) en evt. noemen en verwijzen naar handmatige test scripts/documenten.
+
+MAKEN VAN DE C4 DIAGRAMMEN
  
 ## 7. Bijdrage Agile werken, groepsproces en communicatie opdrachtgever en soft skills
 
