@@ -81,7 +81,7 @@ B. Elk groepslid laat zien dat hij/zij:
 - [ ] een eigen eigen rol en specialisatie heeft gevonden
 - [ ] een bijdrage levert en een Agile aanpak hanteert
 
-## Indviduele bijdrage factsheets
+## Individuele bijdrage factsheets
 
 # Eigen bijdrage <mijn-naam>
  
@@ -152,3 +152,40 @@ Geef tot slot hier voor jezelf minimaal 2 en maximaal **4 tops** en 2 dito (2 to
 
 Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algemener hoe je terugkijkt op het project. Geef wat constructieve feedback, tips aan docenten/beoordelaars e.d. En beschrijf wat je aan devops kennis, vaardigheden of andere zaken meeneemt naar je afstudeeropdracht of verdere loopbaan. 
 
+# C4 diagrams
+
+## System context diagram
+
+```mermaid
+C4Context
+      title System Context diagram for Pitstop
+        Person(EmployeeA, "Employee", "Employee working for pitstop")
+
+        System(SystemA, "System pitstop webapp", "")
+
+        System(SystemB, "Vehicle management", "")
+        System(SystemC, "Customer managment", "")
+        System(SystemD, "Workshop managment", "")
+        System(SystemJ, "Loyalty program managment", "")
+
+        System(SystemI, "MessageBroker", "")
+
+        System(SystemE, "Time service","")
+        System(SystemF, "Invoicing", "")
+        System(SystemG, "Notifications", "")
+        System(SystemH, "Auditlog", "")
+
+        Rel_D(EmployeeA, SystemA, "Uses")
+        Rel_D(SystemA, SystemB, "Uses")
+        Rel_D(SystemA, SystemC, "Uses")
+        Rel_D(SystemA, SystemD, "Uses")
+        Rel_D(SystemA, SystemJ, "Uses")
+        Rel_D(SystemJ, SystemI, "Uses")
+        Rel_D(SystemB, SystemI, "Uses")
+        Rel_D(SystemC, SystemI, "Uses")
+        Rel_D(SystemD, SystemI, "Uses")
+        Rel_D(SystemI, SystemF, "Uses")
+        Rel_D(SystemI, SystemG, "Uses")
+        Rel_D(SystemI, SystemH, "Uses")
+        Rel_U(SystemE, SystemI, "Uses")
+```
