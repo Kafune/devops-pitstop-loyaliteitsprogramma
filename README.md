@@ -233,3 +233,70 @@ C4Container
     
     UpdateLayoutConfig($c4ShapeInRow="2")
 ```
+
+### Customer management diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Customer managment") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, API, "")
+    }
+    System_Ext(SystemB, Pitstop Web APP, "")
+    System_Ext(SystemC, Message Broker, "")
+    Rel_D(SystemB, SystemA, "Request from")
+    Rel_R(SystemA, DatabaseA, "Queries")
+    Rel_D(SystemA, SystemC, "Uses")
+```
+
+### Invoicing diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Invoicing") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, Event Handler, "")
+    }
+    System_Ext(SystemC, Message Broker, "")
+    System_Ext(SystemD, Prestoprint,"")
+    Rel_R(SystemA, DatabaseA, "Creates and reads from")
+    Rel_D(SystemC, SystemA, "Sends events to")
+    Rel_D(SystemA, SystemD, "Emails HTML message to")
+```
+
+### Notification diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Notifications") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, Event Handler, "")
+    }
+    System_Ext(SystemC, Message Broker, "")
+    Rel_R(SystemA, DatabaseA, "Creates and reads from")
+    Rel_D(SystemC, SystemA, "Sends events to")
+```
+
+### Auditlog diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Auditlog") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, Event Handler, "")
+    }
+    System_Ext(SystemC, Message Broker, "")
+    Rel_R(SystemA, DatabaseA, "Creates and reads from")
+    Rel_D(SystemC, SystemA, "Sends events to")
+```
+
+### Time service diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Time service") {
+        Container(SystemA, Event Handler, "")
+    }
+    System_Ext(SystemC, Message Broker, "")
+    Rel_D(SystemA, SystemC, "Sends time to")
+```
