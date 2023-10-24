@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-push-docker-image
+spec:
+  description: Build the separate docker image then push to Docker registry.
+  params:
+    - name: image-name-tag
+      type: string
+  workspaces:
+  - name: source
+  steps:
+  - name: read
+    image: docker:latest
+    script: |
+      #!/usr/bin/env sh
+      cat $(workspaces.source.path)/src/LoyalitySystemAPI
+      docker build -t $(params.image-name-tag) .
+      docker push $(params.image-name-tag)

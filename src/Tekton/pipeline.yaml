@@ -11,6 +11,8 @@ spec:
     description: The git repo URL to clone from.
   - name: image-reference
     type: string
+  - name: image-name-tag
+    type: string
   workspaces:
   - name: shared-data
     description: | 
@@ -38,15 +40,25 @@ spec:
   #   workspaces:
   #   - name: source
   #     workspace: shared-data
-  - name: build-push
+  - name: build-push-image
     runAfter: ["fetch-source"]
     taskRef:
-      name: kaniko
+      name: build-push-docker-image
     workspaces:
     - name: source
       workspace: shared-data
-    - name: dockerconfig
-      workspace: docker-credentials
     params:
-    - name: IMAGE
-      value: $(params.image-reference)
+    - name: image-name-tag
+      value: $(params.image-name-tag)
+  # - name: build-push
+  #   runAfter: ["fetch-source"]
+  #   taskRef:
+  #     name: kaniko
+  #   workspaces:
+  #   - name: source
+  #     workspace: shared-data
+  #   - name: dockerconfig
+  #     workspace: docker-credentials
+  #   params:
+  #   - name: IMAGE
+  #     value: $(params.image-reference)

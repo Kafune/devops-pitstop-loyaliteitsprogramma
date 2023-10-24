@@ -28,4 +28,6 @@ spec:
   - name: repo-url
     value: git@github.com:hanaim-devops/pitstop-groep-d.git
   - name: image-reference
-    value: docker.io/kafune/unit-testing-using-dotnet-test-postgres/general:bp-test
+    value: docker.io/kafune/loyaltysystemapi:1.0
+  - name: image-name-tag
+    value: loyaltysystemapi:1.0
