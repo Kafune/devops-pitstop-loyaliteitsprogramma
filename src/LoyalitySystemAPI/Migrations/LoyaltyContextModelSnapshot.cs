@@ -23,8 +23,8 @@ namespace LoyalitySystemAPI.Migrations
 
             modelBuilder.Entity("LoyalitySystemAPI.Models.Loyalty", b =>
                 {
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Category")
                         .IsRequired()

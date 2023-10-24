@@ -1,23 +1,23 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM pitstop-dotnet-sdk-base:1.0 AS build-env
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["Directory.Packages.props", "."]
-COPY ["LoyalitySystemAPI/LoyalitySystemAPI.csproj", "LoyalitySystemAPI/"]
-RUN dotnet restore "LoyalitySystemAPI/LoyalitySystemAPI.csproj"
-COPY . .
-WORKDIR "/src/LoyalitySystemAPI"
-RUN dotnet build "LoyalitySystemAPI.csproj" -c Release -o /app/build
+# Copy necessary files and restore as distinct layer
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish "LoyalitySystemAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM base AS final
+# Build runtime image
+FROM pitstop-dotnet-aspnet-base:1.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build-env /app/out .
+
+# Expose ports
+EXPOSE 5300/tcp
+ENV ASPNETCORE_URLS http://*:5300
+HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5300/hc || exit 1
+
+# Start
 ENTRYPOINT ["dotnet", "LoyalitySystemAPI.dll"]
