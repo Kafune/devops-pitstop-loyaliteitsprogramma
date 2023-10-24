@@ -27,6 +27,8 @@ Beschrijf hier en geef links naar je bijdragen aan het opzetten en verder automa
 
 NB Het gebruik van *versiebeheer* ((e.g. git)) hoort bij je standaardtaken en deze hoef je onder dit punt NIET te beschrijven, het gaat hier vooral om documenteren van processtandaarden, zoals toepassen van een pull model.
 
+IMPLEMENTATIE VAN INFLUXDB
+
 ## 4. Onderzoek
 
 Competenties: *Nieuwsgierige houding*
