@@ -24,10 +24,7 @@ namespace LoyalitySystemAPI.Migrations
             modelBuilder.Entity("LoyalitySystemAPI.Models.Loyalty", b =>
                 {
                     b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
 
                     b.Property<string>("Category")
                         .IsRequired()

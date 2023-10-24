@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoyalitySystemAPI.Migrations
 {
     [DbContext(typeof(LoyaltyContext))]
-    [Migration("20231024114416_InitialCreate")]
+    [Migration("20231024115911_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,10 +27,7 @@ namespace LoyalitySystemAPI.Migrations
             modelBuilder.Entity("LoyalitySystemAPI.Models.Loyalty", b =>
                 {
                     b.Property<int>("CustomerID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
 
                     b.Property<string>("Category")
                         .IsRequired()

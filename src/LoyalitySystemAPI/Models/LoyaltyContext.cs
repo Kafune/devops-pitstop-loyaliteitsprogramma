@@ -1,4 +1,7 @@
-﻿namespace LoyalitySystemAPI.Models
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
+
+namespace LoyalitySystemAPI.Models
 {
     public class LoyaltyContext : DbContext
     {
@@ -12,8 +15,13 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Loyalty>()
+                .Property(m => m.CustomerID)
+                .ValueGeneratedNever();
+
             builder.Entity<Loyalty>().HasKey(m => m.CustomerID);
             builder.Entity<Loyalty>().ToTable("Loyalty");
+
             base.OnModelCreating(builder);
         }
 
