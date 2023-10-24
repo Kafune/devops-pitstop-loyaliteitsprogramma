@@ -6,6 +6,8 @@ Je schrapt verder deze tekst en vervangt alle andere template zaken, zodat allee
  
 Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
 
+Verhaaltje van elk competentie schrijven, i.p.v. bullet points.
+
 - User story Build for failure als loyaliteitssysteem eruit ligt
 
 ## 1. Code/platform bijdrage
