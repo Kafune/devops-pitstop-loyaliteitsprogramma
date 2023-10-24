@@ -6,11 +6,8 @@ Je schrapt verder deze tekst en vervangt alle andere template zaken, zodat allee
  
 Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
 
-<<<<<<< Updated upstream
-=======
 - User story Build for failure als loyaliteitssysteem eruit ligt
 
->>>>>>> Stashed changes
 ## 1. Code/platform bijdrage
 
 Competenties: *DevOps-1 Continuous Delivery*
@@ -26,12 +23,7 @@ Competenties: *DevOps-2 Orchestration, Containerization*
  
 Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
 
-<<<<<<< Updated upstream
 - Tekton YAML bestanden aanmaken voor het pullen van een git repo. Latere stappen nog uitvoeren (bijvoorbeeld docker image pushen naar Docker Registry)
-=======
-- Configuratie van Tekton CI/CD. Gelukt om huidige git repo te pullen, maar nog kijken wat ik er verder mee kan doen.
-
->>>>>>> Stashed changes
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
