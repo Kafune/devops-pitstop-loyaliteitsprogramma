@@ -189,3 +189,24 @@ C4Context
         Rel_D(SystemI, SystemH, "Uses")
         Rel_U(SystemE, SystemI, "Uses")
 ```
+## Container diagram
+
+### Vehicle management diagram
+
+```mermaid
+C4Container
+    title Vehicle management
+
+    Container_Boundary(c1, "Vehicle managment") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, API, "")
+    }
+
+    System_Ext(SystemB, Pitstop Web APP, "")
+    System_Ext(SystemC, Message Broker, "")
+
+    Rel_D(SystemB, SystemA, "Request from")
+    Rel_R(SystemA, DatabaseA, "Queries")
+    Rel_D(SystemA, SystemC, "Uses")
+
+```
