@@ -21,6 +21,7 @@ spec:
   - name: git-secret
     description: SSH key for git repo access.
   - name: docker-credentials
+    description: Docker credentials for pushing the image.
   tasks:
   - name: fetch-source
     taskRef:
@@ -36,29 +37,26 @@ spec:
   # - name: show-readme
   #   runAfter: ["fetch-source"]
   #   taskRef:
-  #     name: show-readme
+  #     name: build-push-docker-image
   #   workspaces:
   #   - name: source
   #     workspace: shared-data
-  - name: build-push-image
+  #   params:
+  #   - name: image-name-tag
+  #     value: $(params.image-name-tag)
+  - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
-      name: build-push-docker-image
+      name: kaniko
     workspaces:
     - name: source
       workspace: shared-data
+    - name: dockerconfig
+      workspace: docker-credentials
     params:
-    - name: image-name-tag
-      value: $(params.image-name-tag)
-  # - name: build-push
-  #   runAfter: ["fetch-source"]
-  #   taskRef:
-  #     name: kaniko
-  #   workspaces:
-  #   - name: source
-  #     workspace: shared-data
-  #   - name: dockerconfig
-  #     workspace: docker-credentials
-  #   params:
-  #   - name: IMAGE
-  #     value: $(params.image-reference)
+    - name: IMAGE
+      value: $(params.image-reference)
+    - name: DOCKERFILE
+      value: $(workspaces.source.path)/src/LoyalitySystemAPI/Dockerfile
+    - name: BUILDER_IMAGE
+      value: gcr.io/kaniko-project/executor:v1.7.0
