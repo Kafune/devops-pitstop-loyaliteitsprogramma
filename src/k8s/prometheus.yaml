@@ -1,26 +1,8 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: prometheus-claim0
-  name: prometheus-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: prometheus
-    version: v1
   name: prometheus
   namespace: pitstop
 spec:
@@ -42,15 +24,20 @@ spec:
             - containerPort: 9090
               hostPort: 9090
               protocol: TCP
-          resources: {}
           volumeMounts:
-            - mountPath: /etc/prometheus/prometheus.yml
-              name: prometheus-claim0
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
       restartPolicy: Always
       volumes:
-        - name: prometheus-claim0
-          persistentVolumeClaim:
-            claimName: prometheus-claim0
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+  
+        - name: prometheus-storage-volume
+          emptyDir: {}
 
 ---
 
@@ -62,10 +49,9 @@ metadata:
   name: prometheus
   namespace: pitstop
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 9090
       targetPort: 9090
-      NodePort: 9090
   selector:
     app: prometheus
