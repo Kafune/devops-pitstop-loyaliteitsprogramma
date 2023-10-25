@@ -52,4 +52,5 @@ kubectl apply \
     -f ./workshopmanagementapi$MESHPOSTFIX.yaml \
     -f ./webapp$MESHPOSTFIX.yaml \
     -f ./prometheus.yaml \
-    -f ./node-exporter.yaml
+    -f ./node-exporter.yaml \
+    -f ./grafana.yaml

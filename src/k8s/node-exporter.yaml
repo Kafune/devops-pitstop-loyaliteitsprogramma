@@ -40,8 +40,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: "9100"
-      port: 9100
+    - port: 9100
       targetPort: 9100
+      NodePort: 9100
   selector:
     app: prometheusnodeexporter
