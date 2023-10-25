@@ -75,14 +75,14 @@ services:
   
   loyaltysystemapi:
     image: kafune/loyaltysystemapi:1.0
-    build: LoyaltySystemAPI
+    build: LoyalitySystemAPI
     depends_on:
       - rabbitmq
       - sqlserver
     ports:
       - "5300"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
 
   auditlogservice:
     image: pitstop/auditlogservice:1.0

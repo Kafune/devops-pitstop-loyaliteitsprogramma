@@ -11,25 +11,34 @@ namespace LoyalitySystemAPI.Controllers
         public LoyaltyController(LoyaltyContext dbContext)
         {
             _dbContext = dbContext;
+            Console.WriteLine(_dbContext);
         }
         // GET: api/<LoyaltyController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            Console.WriteLine(_dbContext);
             return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
         // GET api/<LoyaltyController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "value";
+            var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == id);
+            if (loyalty == null)
+            {
+                return NotFound();
+            }
+            return Ok(loyalty);
         }
 
         // POST api/<LoyaltyController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] string value)
         {
+            return Ok();
+            //return Ok(await _dbContext.Loyalties);
         }
 
         // PUT api/<LoyaltyController>/5

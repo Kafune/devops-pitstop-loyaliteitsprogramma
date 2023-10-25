@@ -2,13 +2,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+var sqlConnectionString = builder.Configuration.GetConnectionString("LoyaltyServiceCN");
+builder.Services.AddDbContext<LoyaltyContext>(options => options.UseSqlServer(sqlConnectionString));
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var sqlConnectionString = builder.Configuration.GetConnectionString("LoyaltyServiceCN");
-builder.Services.AddDbContext<LoyaltyContext>(options => options.UseSqlServer(sqlConnectionString));
 
 var app = builder.Build();
 
