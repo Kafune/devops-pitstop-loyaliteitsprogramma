@@ -4,15 +4,15 @@ metadata:
   name: clone-read
 spec:
   description: | 
-    This pipeline clones a git repo, then echoes the README file to the stout.
+    This pipeline clones a git repo, builds a Docker image with Kaniko and
+    pushes it to a registry    
   params:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
   - name: image-reference
     type: string
-  - name: image-name-tag
-    type: string
+    default: index.docker.io/kafune/loyaltysystemapi:1.0
   workspaces:
   - name: shared-data
     description: | 

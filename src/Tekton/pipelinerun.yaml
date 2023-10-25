@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: clone-read-run-
 spec:
-  serviceAccountName: git-service-account
+  serviceAccountName: git-docker-service-account
   pipelineRef:
     name: clone-read
   podTemplate:
