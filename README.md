@@ -174,17 +174,28 @@ C4Context
         System(SystemG, "Notifications", "")
         System(SystemH, "Auditlog", "")
 
-        Rel_D(EmployeeA, SystemA, "Uses")
-        Rel_D(SystemA, SystemB, "Uses")
-        Rel_D(SystemA, SystemC, "Uses")
-        Rel_D(SystemA, SystemD, "Uses")
-        Rel_D(SystemA, SystemJ, "Uses")
-        Rel_D(SystemJ, SystemI, "Uses")
-        Rel_D(SystemB, SystemI, "Uses")
-        Rel_D(SystemC, SystemI, "Uses")
-        Rel_D(SystemD, SystemI, "Uses")
-        Rel_D(SystemI, SystemF, "Uses")
-        Rel_D(SystemI, SystemG, "Uses")
-        Rel_D(SystemI, SystemH, "Uses")
-        Rel_U(SystemE, SystemI, "Uses")
+        Rel_D(EmployeeA, SystemA, "Manages daily tasks with")
+        Rel_D(SystemA, SystemB, "Communicates with")
+        Rel_D(SystemA, SystemC, "Communicates with")
+        Rel_D(SystemA, SystemD, "Communicates with")
+        Rel_D(SystemA, SystemJ, "Communicates with")
+        Rel_D(SystemJ, SystemI, "Publishes using")
+        Rel_D(SystemB, SystemI, "Publishes using")
+        Rel_D(SystemC, SystemI, "Publishes using")
+        Rel_D(SystemD, SystemI, "Publishes using")
+        Rel_D(SystemI, SystemF, "Sends events to")
+        Rel_D(SystemI, SystemG, "Sends events to")
+        Rel_D(SystemI, SystemH, "Sends events to")
+        Rel_U(SystemE, SystemI, "Publishes using")
 ```
+### Legenda
+Pitstop Webapp System: The web application is the front-end for the system. Users can manage customers, vehicles and the planning for the workshop from this front-end. 
+Vehicle Management: This service offers an API that is used to manage Vehicles in the system.
+Customer Management: This service offers an API that is used to manage Customers in the system.
+Workshop Management: This service contains 2 parts: an API for managing the workshop planning and an event-handler that handles events and builds a read-model that is used by the API.
+Loyalty Program Management: This service handles rewards customers receive for their service and repairs.
+Message Broker: Handles messages between services.
+Time Service: Service that informs other services when a certain time-period has passed. 
+Invoicing: Creates an invoice for all maintenance jobs that have been finished (and are not yet invoiced). 
+Notifications: The notification service sends a notification to every customer that has a maintenance job planned on the current day.
+Auditlog: Picks up all events from the message-broker and stores them for later reference.
