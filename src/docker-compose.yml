@@ -168,6 +168,14 @@ services:
     ports:
       - 3000:3000
 
+  influxdb:
+    image: influxdb:latest
+    expose:
+      - 8086
+    ports:
+      - 8086:8086
+
+
 volumes:
   sqlserverdata:
     external: true
