@@ -1,6 +1,6 @@
 ﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace LoyalitySystemAPI.Controllers
+namespace LoyaltySystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -13,6 +13,7 @@ namespace LoyalitySystemAPI.Controllers
             _dbContext = dbContext;
             Console.WriteLine(_dbContext);
         }
+
         // GET: api/<LoyaltyController>
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -22,7 +23,7 @@ namespace LoyalitySystemAPI.Controllers
         }
 
         // GET api/<LoyaltyController>/5
-        [HttpGet("{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == id);
@@ -33,12 +34,32 @@ namespace LoyalitySystemAPI.Controllers
             return Ok(loyalty);
         }
 
-        // POST api/<LoyaltyController>
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string value)
+        // POST api/<LoyaltyController>/AddPoints
+        [HttpPost("AddPoints")]
+        public async Task<IActionResult> AddPoints([FromBody] LoyaltyPointsRequest request)
         {
-            return Ok();
-            //return Ok(await _dbContext.Loyalties);
+            if (request == null || string.IsNullOrEmpty(request.CustomerID) || request.Points <= 0)
+            {
+                return BadRequest("Invalid request data.");
+            }
+
+            var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == request.CustomerID);
+            if (loyalty == null)
+            {
+                return NotFound("User not found.");
+            }
+            loyalty.Points += request.Points;
+
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                return Ok("Punten zijn succesvol toegevoegd.");
+            }
+            catch (Exception ex)
+            {        
+                Console.WriteLine($"Fout bij het opslaan van punten: {ex.Message}");
+                return StatusCode(500, "Interne serverfout bij het opslaan van punten.");
+            }
         }
 
         // PUT api/<LoyaltyController>/5

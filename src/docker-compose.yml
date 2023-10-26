@@ -74,7 +74,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
   
   loyaltysystemapi:
-    image: kafune/loyaltysystemapi:1.0
+    image: loyaltysystemapi:latest
     build: LoyalitySystemAPI
     depends_on:
       - rabbitmq
