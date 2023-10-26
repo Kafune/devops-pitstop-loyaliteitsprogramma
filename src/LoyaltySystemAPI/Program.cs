@@ -1,7 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 var sqlConnectionString = builder.Configuration.GetConnectionString("LoyaltyServiceCN");
 builder.Services.AddDbContext<LoyaltyContext>(options => options.UseSqlServer(sqlConnectionString));
 
@@ -26,7 +25,6 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoyaltyProgram API - v1");
 });
-
 
 app.UseHttpsRedirection();
 

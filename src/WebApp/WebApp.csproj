@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />  
     <PackageReference Include="Microsoft.AspNetCore.HealthChecks" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
     <PackageReference Include="Pitstop.Infrastructure.Messaging" />
     <PackageReference Include="Polly" />
     <PackageReference Include="Refit" />

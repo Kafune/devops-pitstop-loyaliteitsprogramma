@@ -6,7 +6,6 @@ namespace LoyaltySystemAPI.Controllers
     [ApiController]
     public class LoyaltyController : ControllerBase
     {
-        LoyaltyContext _dbContext;
 
         public LoyaltyController(LoyaltyContext dbContext)
         {
@@ -22,7 +21,6 @@ namespace LoyaltySystemAPI.Controllers
             return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
-        // GET api/<LoyaltyController>/5
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> Get(string id)
         {
