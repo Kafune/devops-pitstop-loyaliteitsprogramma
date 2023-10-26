@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: mcr.microsoft.com/dotnet/sdk:7.0-alpine
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v3.2.0
+
+  deploy:
+    runs-on: docker:24.0.5
+    needs: [build]
+    services:
+      dind:
+        image: docker:24.0.5-dind
+      variables:
+        DOCKER_HOST: tcp://docker:2375
+        DOCKER_TLS_CERTDIR: ""
