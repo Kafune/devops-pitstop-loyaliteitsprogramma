@@ -52,7 +52,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: .
-        file: ./Dockerfile
+        context: ./src/LoyalitySystemAPI
+        file: ./src/LoyalitySystemAPI/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USER }}loyaltysystemapi:1.0
