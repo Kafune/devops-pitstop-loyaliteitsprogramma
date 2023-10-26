@@ -9,7 +9,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult About()
+    public IActionResult LoyaltyProgram()
     {
         return View();
     }
