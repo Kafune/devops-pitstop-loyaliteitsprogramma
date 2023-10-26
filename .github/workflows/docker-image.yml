@@ -22,13 +22,16 @@ jobs:
         dotnet restore
         dotnet publish -c release -o ./../app --no-restore
  
-    - name: Release 
-      # env:
-      #   DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
-      #   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        cd ./src/LoyalitySystemAPI
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        docker build -t loyaltysystemapi .
-        docker tag loyaltysystemapi $DOCKER_USER/loyaltysystemapi:1.1
-        docker push $DOCKER_USER/loyaltysystemapi:1.1
+  release:
+      runs-on: docker-latest
+      steps:
+        - name: Release 
+          # env:
+          #   DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+          #   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          run: |
+            cd ./src/LoyalitySystemAPI
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker build -t loyaltysystemapi .
+            docker tag loyaltysystemapi $DOCKER_USER/loyaltysystemapi:1.1
+            docker push $DOCKER_USER/loyaltysystemapi:1.1
