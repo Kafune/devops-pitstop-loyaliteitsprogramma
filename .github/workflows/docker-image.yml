@@ -40,4 +40,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USER }}/loyaltysystemapi:1.0
+        tags: ${{ secrets.DOCKERHUB_USER }}loyaltysystemapi:1.0
