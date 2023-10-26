@@ -25,12 +25,19 @@ jobs:
     - name: cache
       uses: actions/cache@v3
       with:
-        path: .
+        key: loyaltysystemapi
+        path: ./src/LoyalitySystemAPI
  
   release:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+    - name: cache
+      uses: actions/cache@v3
+      with:
+        key: loyaltysystemapi
+        path: ./src/LoyalitySystemAPI
+
     - name: Login docker
       uses: docker/login-action@v3
       with:
