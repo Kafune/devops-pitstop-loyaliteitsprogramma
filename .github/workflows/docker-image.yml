@@ -20,7 +20,7 @@ jobs:
       run: |
         cd ./src/LoyalitySystemAPI
         dotnet restore
-        dotnet publish -c release -o /app --no-restore
+        dotnet publish -c release -o ./../app --no-restore
  
     - name: Release 
       # env:
