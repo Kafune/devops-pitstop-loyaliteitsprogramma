@@ -12,6 +12,36 @@ public class VehicleManagementDBContext : DbContext
     {
         builder.Entity<Vehicle>().HasKey(m => m.LicenseNumber);
         builder.Entity<Vehicle>().ToTable("Vehicle");
+        builder.Entity<Vehicle>().HasData(
+                new Vehicle
+                {
+                    LicenseNumber = "123ABC",
+                    Brand = "Toyota",
+                    Type = "Sedan",
+                    OwnerId = "1"
+                },
+                new Vehicle
+                {
+                    LicenseNumber = "456DEF",
+                    Brand = "Honda",
+                    Type = "SUV",
+                    OwnerId = "2"
+                },
+                new Vehicle
+                {
+                    LicenseNumber = "789GHI",
+                    Brand = "Ford",
+                    Type = "Truck",
+                    OwnerId = "3"
+                },
+                new Vehicle
+                {
+                    LicenseNumber = "101JKL",
+                    Brand = "Chevrolet",
+                    Type = "Convertible",
+                    OwnerId = "4"
+                }
+            );
         base.OnModelCreating(builder);
     }
 
