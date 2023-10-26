@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: clone-read-run-
 spec:
-  serviceAccountName: git-service-account
+  serviceAccountName: git-docker-service-account
   pipelineRef:
     name: clone-read
   podTemplate:
@@ -28,6 +28,6 @@ spec:
   - name: repo-url
     value: git@github.com:hanaim-devops/pitstop-groep-d.git
   - name: image-reference
-    value: docker.io/kafune/loyaltysystemapi:1.0
+    value: index.docker.io/kafune/loyaltysystemapi:1.0
   - name: image-name-tag
     value: loyaltysystemapi:1.0

@@ -23,7 +23,7 @@ Puntensysteem voor Klantloyaliteitsprogramma:
 
 Uitgegeven Bedrag:
 
-Voor elke euro die een klant uitgeeft aan onderhouds- en reparatiediensten, ontvangt hij/zij 1 loyaliteitspunt.
+Voor elke 30 minuten dat de job duurt krijgt de customer 25 punten.
 Niveaus en Beloningen:
 
 - Zilverniveau (0-500 punten):
@@ -35,16 +35,7 @@ Niveaus en Beloningen:
 - Platinaniveau (1001+ punten):
   - 2000 punten: 20% korting op de volgende servicebeurt.
   - 2500 punten: Gratis kleine reparatie (tot een bepaald bedrag).
-- Speciale Acties:
-  - Verdien dubbele punten tijdens speciale actieperiodes (bijvoorbeeld: feestdagen, jubileumvieringen).
-- Vriendenverwijzingsbonus:
-  - Verdien 100 extra punten voor elke nieuwe klant die wordt doorverwezen naar het loyaliteitsprogramma.
-- Verjaardagsbeloning:
-  - Ontvang 50 punten als geschenk op je verjaardag.
-- Inwisselen van Punten:
-  - Klanten kunnen hun punten inwisselen bij de volgende servicebeurt of reparatie.
 
-Dit is slechts een voorbeeld en het puntensysteem kan naar wens worden aangepast. Het is belangrijk dat het systeem duidelijk en transparant is voor klanten, zodat ze begrijpen hoe ze punten kunnen verdienen en hoe ze deze kunnen inwisselen voor beloningen. Daarnaast is het van belang om de privacy van klantgegevens te waarborgen en te voldoen aan eventuele wettelijke vereisten met betrekking tot loyaliteitsprogramma's.
 ```
 
 Maak een (eigen) README in PitStop (sla originele README elders op, net als bij weekopdrachten)
@@ -81,7 +72,7 @@ B. Elk groepslid laat zien dat hij/zij:
 - [ ] een eigen eigen rol en specialisatie heeft gevonden
 - [ ] een bijdrage levert en een Agile aanpak hanteert
 
-## Indviduele bijdrage factsheets
+## Individuele bijdrage factsheets
 
 # Eigen bijdrage <mijn-naam>
  
@@ -152,3 +143,50 @@ Geef tot slot hier voor jezelf minimaal 2 en maximaal **4 tops** en 2 dito (2 to
 
 Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algemener hoe je terugkijkt op het project. Geef wat constructieve feedback, tips aan docenten/beoordelaars e.d. En beschrijf wat je aan devops kennis, vaardigheden of andere zaken meeneemt naar je afstudeeropdracht of verdere loopbaan. 
 
+# C4 diagrams
+
+## System context diagram
+
+```mermaid
+C4Context
+        Person(EmployeeA, "Employee", "Employee working for pitstop")
+
+        System(SystemA, "System pitstop webapp", "")
+
+        System(SystemB, "Vehicle management", "")
+        System(SystemC, "Customer managment", "")
+        System(SystemD, "Workshop managment", "")
+        System(SystemJ, "Loyalty program managment", "")
+
+        System(SystemI, "MessageBroker", "")
+
+        System(SystemE, "Time service","")
+        System(SystemF, "Invoicing", "")
+        System(SystemG, "Notifications", "")
+        System(SystemH, "Auditlog", "")
+
+        Rel_D(EmployeeA, SystemA, "Manages daily tasks with")
+        Rel_D(SystemA, SystemB, "Communicates with")
+        Rel_D(SystemA, SystemC, "Communicates with")
+        Rel_D(SystemA, SystemD, "Communicates with")
+        Rel_D(SystemA, SystemJ, "Communicates with")
+        Rel_D(SystemJ, SystemI, "Publishes using")
+        Rel_D(SystemB, SystemI, "Publishes using")
+        Rel_D(SystemC, SystemI, "Publishes using")
+        Rel_D(SystemD, SystemI, "Publishes using")
+        Rel_D(SystemI, SystemF, "Sends events to")
+        Rel_D(SystemI, SystemG, "Sends events to")
+        Rel_D(SystemI, SystemH, "Sends events to")
+        Rel_U(SystemE, SystemI, "Publishes using")
+```
+### Legenda
+Pitstop Webapp System: The web application is the front-end for the system. Users can manage customers, vehicles and the planning for the workshop from this front-end. 
+Vehicle Management: This service offers an API that is used to manage Vehicles in the system.
+Customer Management: This service offers an API that is used to manage Customers in the system.
+Workshop Management: This service contains 2 parts: an API for managing the workshop planning and an event-handler that handles events and builds a read-model that is used by the API.
+Loyalty Program Management: This service handles rewards customers receive for their service and repairs.
+Message Broker: Handles messages between services.
+Time Service: Service that informs other services when a certain time-period has passed. 
+Invoicing: Creates an invoice for all maintenance jobs that have been finished (and are not yet invoiced). 
+Notifications: The notification service sends a notification to every customer that has a maintenance job planned on the current day.
+Auditlog: Picks up all events from the message-broker and stores them for later reference.

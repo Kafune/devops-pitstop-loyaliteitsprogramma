@@ -4,15 +4,15 @@ metadata:
   name: clone-read
 spec:
   description: | 
-    This pipeline clones a git repo, then echoes the README file to the stout.
+    This pipeline clones a git repo, builds a Docker image with Kaniko and
+    pushes it to a registry    
   params:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
   - name: image-reference
     type: string
-  - name: image-name-tag
-    type: string
+    default: index.docker.io/kafune/loyaltysystemapi:1.0
   workspaces:
   - name: shared-data
     description: | 
@@ -21,6 +21,7 @@ spec:
   - name: git-secret
     description: SSH key for git repo access.
   - name: docker-credentials
+    description: Docker credentials for pushing the image.
   tasks:
   - name: fetch-source
     taskRef:
@@ -36,29 +37,26 @@ spec:
   # - name: show-readme
   #   runAfter: ["fetch-source"]
   #   taskRef:
-  #     name: show-readme
+  #     name: build-push-docker-image
   #   workspaces:
   #   - name: source
   #     workspace: shared-data
-  - name: build-push-image
+  #   params:
+  #   - name: image-name-tag
+  #     value: $(params.image-name-tag)
+  - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
-      name: build-push-docker-image
+      name: kaniko
     workspaces:
     - name: source
       workspace: shared-data
+    - name: dockerconfig
+      workspace: docker-credentials
     params:
-    - name: image-name-tag
-      value: $(params.image-name-tag)
-  # - name: build-push
-  #   runAfter: ["fetch-source"]
-  #   taskRef:
-  #     name: kaniko
-  #   workspaces:
-  #   - name: source
-  #     workspace: shared-data
-  #   - name: dockerconfig
-  #     workspace: docker-credentials
-  #   params:
-  #   - name: IMAGE
-  #     value: $(params.image-reference)
+    - name: IMAGE
+      value: $(params.image-reference)
+    - name: DOCKERFILE
+      value: $(workspaces.source.path)/src/LoyalitySystemAPI/Dockerfile
+    - name: BUILDER_IMAGE
+      value: gcr.io/kaniko-project/executor:v1.7.0
