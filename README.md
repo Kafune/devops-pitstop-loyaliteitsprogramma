@@ -23,7 +23,7 @@ Puntensysteem voor Klantloyaliteitsprogramma:
 
 Uitgegeven Bedrag:
 
-Voor elke euro die een klant uitgeeft aan onderhouds- en reparatiediensten, ontvangt hij/zij 1 loyaliteitspunt.
+Voor elke 30 minuten dat de job duurt krijgt de customer 25 punten.
 Niveaus en Beloningen:
 
 - Zilverniveau (0-500 punten):
@@ -35,16 +35,7 @@ Niveaus en Beloningen:
 - Platinaniveau (1001+ punten):
   - 2000 punten: 20% korting op de volgende servicebeurt.
   - 2500 punten: Gratis kleine reparatie (tot een bepaald bedrag).
-- Speciale Acties:
-  - Verdien dubbele punten tijdens speciale actieperiodes (bijvoorbeeld: feestdagen, jubileumvieringen).
-- Vriendenverwijzingsbonus:
-  - Verdien 100 extra punten voor elke nieuwe klant die wordt doorverwezen naar het loyaliteitsprogramma.
-- Verjaardagsbeloning:
-  - Ontvang 50 punten als geschenk op je verjaardag.
-- Inwisselen van Punten:
-  - Klanten kunnen hun punten inwisselen bij de volgende servicebeurt of reparatie.
 
-Dit is slechts een voorbeeld en het puntensysteem kan naar wens worden aangepast. Het is belangrijk dat het systeem duidelijk en transparant is voor klanten, zodat ze begrijpen hoe ze punten kunnen verdienen en hoe ze deze kunnen inwisselen voor beloningen. Daarnaast is het van belang om de privacy van klantgegevens te waarborgen en te voldoen aan eventuele wettelijke vereisten met betrekking tot loyaliteitsprogramma's.
 ```
 
 Maak een (eigen) README in PitStop (sla originele README elders op, net als bij weekopdrachten)
