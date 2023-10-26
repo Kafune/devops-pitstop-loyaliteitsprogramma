@@ -3,32 +3,31 @@ kind: PersistentVolume
 metadata:
   name: grafana-pv
 spec:
-  storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
   hostPath:
-    path: "/mnt/sda1/data/grafana"
+    path: /mnt/sda1/data/grafana
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadata: 
+metadata:
   name: grafana-pvc
-spec:    
-  storageClassName: manual
+spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
-  requests:   
-    storage: 1Gi
-  volumeName: "grafana-pv"
-    
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+
 ---
 
-# Grafana Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,10 +49,10 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-            - name: grafana-volume
+            - name: grafana-data
               mountPath: /var/lib/grafana
       volumes:
-        - name: grafana-volume
+        - name: grafana-data
           persistentVolumeClaim:
             claimName: grafana-pvc
 

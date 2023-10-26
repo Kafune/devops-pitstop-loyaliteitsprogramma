@@ -3,28 +3,28 @@ kind: PersistentVolume
 metadata:
   name: prometheus-pv
 spec:
-  storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
   hostPath:
-    path: "/mnt/sda1/data/prometheus"
+    path: /mnt/sda1/data/prometheus
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
-metadata: 
+metadata:
   name: prometheus-pvc
-spec:  
-  storageClassName: manual  
+spec:
   accessModes:
     - ReadWriteOnce
   resources:
-    requests:   
-      storage: 1Gi
-  volumeName: "prometheus-pv"
+    requests:
+      storage: 5Gi
+  storageClassName: standard
 
 ---
 
@@ -78,7 +78,7 @@ spec:
             - name: prometheus-config-volume
               mountPath: /etc/prometheus/
             - name: prometheus-volume
-            mountPath: /prometheus
+              mountPath: /prometheus
       volumes:
         - name: prometheus-config-volume
           configMap:
