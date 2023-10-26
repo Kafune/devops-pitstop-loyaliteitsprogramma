@@ -35,32 +35,33 @@ namespace LoyaltySystemAPI.Controllers
         }
 
         // POST api/<LoyaltyController>/AddPoints
-        [HttpPost("AddPoints")]
-        public async Task<IActionResult> AddPoints([FromBody] LoyaltyPointsRequest request)
-        {
-            if (request == null || string.IsNullOrEmpty(request.CustomerID) || request.Points <= 0)
-            {
-                return BadRequest("Invalid request data.");
-            }
+[HttpPost("AddPoints")]
+public async Task<IActionResult> AddPoints([FromQuery] string customerId, [FromQuery] int pointsToAdd)
+{
+    // Haal de huidige punten op met behulp van het GetById endpoint
+    var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == customerId);
 
-            var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == request.CustomerID);
-            if (loyalty == null)
-            {
-                return NotFound("User not found.");
-            }
-            loyalty.Points += request.Points;
+    // Controleer of de loyalty-entry bestaat
+    if (loyalty == null)
+    {
+        return NotFound($"Geen klant gevonden met ID: {customerId}");
+    }
 
-            try
-            {
-                await _dbContext.SaveChangesAsync();
-                return Ok("Punten zijn succesvol toegevoegd.");
-            }
-            catch (Exception ex)
-            {        
-                Console.WriteLine($"Fout bij het opslaan van punten: {ex.Message}");
-                return StatusCode(500, "Interne serverfout bij het opslaan van punten.");
-            }
-        }
+    // Haal de huidige punten op uit het Loyalty-object
+    int currentPoints = int.Parse(loyalty.Points);
+
+    // Voeg de nieuwe punten toe
+    currentPoints += pointsToAdd;
+
+    // Update het Loyalty-object in de database
+    loyalty.Points = currentPoints.ToString();
+    _dbContext.Update(loyalty);
+    await _dbContext.SaveChangesAsync();
+
+    // Geef een succesbericht terug met het nieuwe aantal punten
+    return Ok($"Nieuw aantal punten voor klant {customerId}: {currentPoints}");
+}
+
 
         // PUT api/<LoyaltyController>/5
         [HttpPut("{id}")]
