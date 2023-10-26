@@ -193,55 +193,11 @@ Auditlog: Picks up all events from the message-broker and stores them for later 
 
 ## Container diagram
 
-### Vehicle management diagram
+### Loyalty program diagram
 
 ```mermaid
 C4Container
-    Container_Boundary(c1, "Vehicle managment") {
-        ContainerDb(DatabaseA, Database, "")
-        Container(SystemA, API, "")
-    }
-
-    System_Ext(SystemB, Pitstop Web APP, "")
-    System_Ext(SystemC, Message Broker, "")
-
-    Rel_D(SystemB, SystemA, "Request from")
-    Rel_R(SystemA, DatabaseA, "Queries")
-    Rel_D(SystemA, SystemC, "Uses")
-
-```
-
-### Workshop management
-
-```mermaid
-C4Container
-    System_Ext(SystemB, Pitstop Web APP, "")
-
-    Container_Boundary(c1, "Workshop managment") {
-        Container(SystemA, API, "")
-        Container(SystemD, EventHandler, "")
-        ContainerDb(DatabaseA, Event store, "")
-        ContainerDb(DatabaseB, Read models, "")
-    }
-
-    Rel_D(SystemA, DatabaseA, "Queries")
-    Rel_D(SystemA, DatabaseB, "Queries")
-    Rel_D(SystemD, DatabaseB, "Queries")
-    Rel(SystemB, SystemA, "Request from")
-
-    System_Ext(SystemC, Message Broker, "")
-
-    Rel_D(SystemA, SystemC, "Uses")
-    Rel_D(SystemC, SystemD, "Uses")
-    
-    UpdateLayoutConfig($c4ShapeInRow="2")
-```
-
-### Customer management diagram
-
-```mermaid
-C4Container
-    Container_Boundary(c1, "Customer managment") {
+    Container_Boundary(c1, "Loyalty program") {
         ContainerDb(DatabaseA, Database, "")
         Container(SystemA, API, "")
     }
@@ -250,56 +206,4 @@ C4Container
     Rel_D(SystemB, SystemA, "Request from")
     Rel_R(SystemA, DatabaseA, "Queries")
     Rel_D(SystemA, SystemC, "Uses")
-```
-
-### Invoicing diagram
-
-```mermaid
-C4Container
-    Container_Boundary(c1, "Invoicing") {
-        ContainerDb(DatabaseA, Database, "")
-        Container(SystemA, Event Handler, "")
-    }
-    System_Ext(SystemC, Message Broker, "")
-    System_Ext(SystemD, Prestoprint,"")
-    Rel_R(SystemA, DatabaseA, "Creates and reads from")
-    Rel_D(SystemC, SystemA, "Sends events to")
-    Rel_D(SystemA, SystemD, "Emails HTML message to")
-```
-
-### Notification diagram
-
-```mermaid
-C4Container
-    Container_Boundary(c1, "Notifications") {
-        ContainerDb(DatabaseA, Database, "")
-        Container(SystemA, Event Handler, "")
-    }
-    System_Ext(SystemC, Message Broker, "")
-    Rel_R(SystemA, DatabaseA, "Creates and reads from")
-    Rel_D(SystemC, SystemA, "Sends events to")
-```
-
-### Auditlog diagram
-
-```mermaid
-C4Container
-    Container_Boundary(c1, "Auditlog") {
-        ContainerDb(DatabaseA, Database, "")
-        Container(SystemA, Event Handler, "")
-    }
-    System_Ext(SystemC, Message Broker, "")
-    Rel_R(SystemA, DatabaseA, "Creates and reads from")
-    Rel_D(SystemC, SystemA, "Sends events to")
-```
-
-### Time service diagram
-
-```mermaid
-C4Container
-    Container_Boundary(c1, "Time service") {
-        Container(SystemA, Event Handler, "")
-    }
-    System_Ext(SystemC, Message Broker, "")
-    Rel_D(SystemA, SystemC, "Sends time to")
 ```
