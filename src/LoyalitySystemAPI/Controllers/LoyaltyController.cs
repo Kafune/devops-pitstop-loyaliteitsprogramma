@@ -38,28 +38,40 @@ namespace LoyaltySystemAPI.Controllers
 [HttpPost("AddPoints")]
 public async Task<IActionResult> AddPoints([FromQuery] string customerId, [FromQuery] int pointsToAdd)
 {
-    // Haal de huidige punten op met behulp van het GetById endpoint
     var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == customerId);
 
-    // Controleer of de loyalty-entry bestaat
     if (loyalty == null)
     {
         return NotFound($"Geen klant gevonden met ID: {customerId}");
     }
 
-    // Haal de huidige punten op uit het Loyalty-object
     int currentPoints = int.Parse(loyalty.Points);
-
-    // Voeg de nieuwe punten toe
     currentPoints += pointsToAdd;
-
-    // Update het Loyalty-object in de database
     loyalty.Points = currentPoints.ToString();
+
+    string customercategory = DetermineCustomercategory(currentPoints);
+    loyalty.Category = customercategory;
+
     _dbContext.Update(loyalty);
     await _dbContext.SaveChangesAsync();
 
-    // Geef een succesbericht terug met het nieuwe aantal punten
     return Ok($"Nieuw aantal punten voor klant {customerId}: {currentPoints}");
+}
+
+private string DetermineCustomercategory(int points)
+{
+    if (points >= 1001)
+    {
+        return "Platina";
+    }
+    else if (points >= 501)
+    {
+        return "Goud";
+    }
+    else
+    {
+        return "Zilver";
+    }
 }
 
 
