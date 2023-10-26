@@ -1,27 +1,33 @@
-name: Docker Image CI
-
+name: Build and Test .NET Project
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+ 
 jobs:
-
   build:
-    runs-on: mcr.microsoft.com/dotnet/sdk:7.0-alpine
-
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3.2.0
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0-alpine'
 
-  deploy:
-    runs-on: docker:24.0.5
-    needs: [build]
-    services:
-      dind:
-        image: docker:24.0.5-dind
-      variables:
-        DOCKER_HOST: tcp://docker:2375
-        DOCKER_TLS_CERTDIR: ""
+    - name: Build
+      run: |
+        dotnet restore
+        dotnet publish -c release -o /app --no-restore
+ 
+    - name: Release 
+      # env:
+      #   DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+      #   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        cd ./src/LoyalitySystemAPI
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        docker build -t loyaltysystemapi .
+        docker tag loyaltysystemapi $DOCKER_USER/loyaltysystemapi:1.1
+        docker push $DOCKER_USER/loyaltysystemapi:1.1

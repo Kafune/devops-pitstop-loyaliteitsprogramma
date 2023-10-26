@@ -18,6 +18,9 @@ Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure
 
 - Aanmaken API Loyaliteitssysteem met ASP.net Core.
 - Aanmaken Models en DBContext voor gebruik EFCore.
+- Opzet Docker containers integratie met pitstop
+- Opzet ASP.net Core en eerste controller loyaliteitssysteem
+- 
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
@@ -26,6 +29,7 @@ Competenties: *DevOps-2 Orchestration, Containerization*
 Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
 
 - Tekton YAML bestanden aanmaken voor het pullen van een git repo. Latere stappen nog uitvoeren (bijvoorbeeld docker image pushen naar Docker Registry)
+- Aanpassen bestaande pitstop configuraties zodat API geintegreerd is met rest van Pitstop
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
@@ -45,18 +49,22 @@ Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe 
 
 Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM  jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat [gebruik van Ansible in combi met Kubernetes](https://www.ansible.com/blog/how-useful-is-ansible-in-a-cloud-native-kubernetes-environment) niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
  
+- Tekton beschrijven
+
 ## 5. Bijdrage code review/kwaliteit anderen en security
 
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
 
 Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste *review acties* die je gedaan hebt, bijvoorbeeld pull requests incl. opmerkingen. Het interessantst zijn natuurlijk gevallen waar code niet optimaal was. Zorg dat je minstens een aantal reviews hebt waar in gitlab voor een externe de kwestie ook duidelijk is, in plaats van dat je dit altijd mondeling binnen het team oplost.
- 
+
+- Reviews: C4 Diagrammen, kijken naar API, front-end
+
 ## 6. Bijdrage documentatie
 
 Competenties: *DevOps-6 Onderzoek*
 
 Zet hier een links naar en geef beschrijving van je C4 diagram of diagrammen, README of andere markdown bestanden, ADR's of andere documentatie. Bij andere markdown bestanden of doumentatie kun je denken aan eigen proces documentatie, zoals code standaarden, commit- of branchingconventies. Tot slot ook user stories en acceptatiecriteria (hopelijk verwerkt in gitlab issues en vertaalt naar `.feature` files) en evt. noemen en verwijzen naar handmatige test scripts/documenten.
- 
+
 ## 7. Bijdrage Agile werken, groepsproces en communicatie opdrachtgever en soft skills
 
 Competenties: *DevOps-1 - Continuous Delivery*, *Agile*
@@ -64,12 +72,16 @@ Competenties: *DevOps-1 - Continuous Delivery*, *Agile*
 Beschrijf hier minimaal 2 en maximaal 4 situaties van je inbreng en rol tijdens Scrum ceremonies. Beschrijf ook feedback of interventies tijdens Scrum meetings, zoals sprint planning of retrospective die je aan groespgenoten hebt gegeven.
 
 Beschrijf tijdens het project onder dit kopje ook evt. verdere activiteiten rondom communicatie met de opdrachtgever of domein experts, of andere meer 'professional skills' of 'soft skilss' achtige zaken.
-  
+
+- DSU beschrijven
+
 ## 8. Leerervaringen
 
 Competenties: *DevOps-7 - Attitude*
 
 Geef tot slot hier voor jezelf minimaal 2 en maximaal **4 tops** en 2 dito (2 tot 4) **tips** á la professional skills die je kunt meenemen in je verdere loopbaan. Beschrijf ook de voor jezelf er het meest uitspringende hulp of feedback van groepsgenoten die je (tot dusver) hebt gehad tijdens het project.
+
+- 
 
 ## 9. Conclusie & feedback
 
