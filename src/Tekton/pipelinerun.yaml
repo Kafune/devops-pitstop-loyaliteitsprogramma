@@ -28,6 +28,6 @@ spec:
   - name: repo-url
     value: git@github.com:hanaim-devops/pitstop-groep-d.git
   - name: image-reference
-    value: index.docker.io/kafune/loyaltysystemapi:1.0
+    value: ghrc.io/kafune/loyaltysystemapi:1.0
   - name: image-name-tag
     value: loyaltysystemapi:1.0

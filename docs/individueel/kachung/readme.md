@@ -5,6 +5,7 @@ Als deliverable voor de individuele bijdrage in het beroepsproduct maak een eige
 Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
 
 SAMENVATTING BIJDRAGE SCHRIJVEN
+
 - back-end opzetten API loyaliteitssysteem
   - EFCore opzet
   - Eerste API Controller
@@ -23,21 +24,11 @@ Competenties: *DevOps-1 Continuous Delivery*
 
 Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure specialist (Ops). Als Developer beschrijf en geef je links van minimaal 2 en maximaal 4 grootste bijdrages qua code functionaliteiten of non-functionele requirements. Idealiter werk je TDD (dus ook commit van tests en bijbehorende code tegelijk), maar je kunt ook linken naar geschreven automatische tests (unit tests, acceptance tests (BDD), integratie tests, end to end tests, performance/load tests, etc.). Als Opser geef je je minimaal 2 maximaal 4 belangrijkste bijdragen aan het opzetten van het Kubernetes platform, achterliggende netwerk infrastructuur of configuration management (MT) buiten Kubernetes (en punt 2).
 
-- Aanmaken Models en DBContext voor gebruik EFCore.
-
-Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https://github.com/hanaim-devops/pitstop-groep-d/issues/6) gewerkt, voornamelijk [het opzetten hiervan] zodat mijn teamleden hiermee verder konden. Hierbij heb ik een aparte .Net Core API aangemaakt. Hierbij heb ik [het eerste model]() en [controller]() aangemaakt voor het loyaliteitssysteem. De controller had alleen een GET request om te testen of de API daadwerkelijk werkte. Ook heb ik de [integratie met EFCore]() ingebouwd zodat het makkelijk is om een databasetabel aan te maken d.m.v. het ORM systeem.
+Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https://github.com/hanaim-devops/pitstop-groep-d/issues/6) gewerkt, voornamelijk [het opzetten hiervan] zodat mijn teamleden hiermee verder konden. Hierbij heb ik een aparte .Net Core API aangemaakt. Hierbij heb ik [het eerste model en controller](https://github.com/hanaim-devops/pitstop-groep-d/commit/7f89efec6c880baf0b422d4da6d7d486fc5d986f) aangemaakt voor het loyaliteitssysteem. De controller had alleen een GET request om te testen of de API daadwerkelijk werkte. Ook heb ik de [integratie met EFCore](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9) werkend gekregen zodat het makkelijk is om een databasetabel aan te maken d.m.v. het ORM systeem. Het werkend krijgen van de EFCore verbinding met de database in Docker duurde het langste. Nadat dit was gelukt, kon ik het API overdragen naar mijn teamgenoten overdragen zodat zij de endpoints konden maken.
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
-Competenties: *DevOps-2 Orchestration, Containerization*
-
-Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
-
-- Tekton YAML bestanden aanmaken voor het pullen van een git repo. Latere stappen nog uitvoeren (bijvoorbeeld docker image pushen naar Docker Registry)
-- Configuratie van loyaliteitsAPI zodat Pitstop gebruik maakt van die aparte microservice [Link naar commit]
-- Dockerfile aangemaakt en aangepast voor Loyaliteitssysteem
-
-De API van het loyaliteitssysteem heb ik uiteindelijk met Pitstop geïntegreerd d.m.v. Docker compose. Hiervoor heb ik de [Dockerfile]() en de [bestaande Docker Compose]() aangepast zodat de image op dezelfde manier als de andere bestaande microservices van Pitstop werd gebouwd. Het configureren duurde een stuk langer dan verwacht, voornamelijk omdat er toch [een aantal verschillen zaten bij de configuraties]() die ik samen met een teamgenoot gewoon niet zag. Dit wist ik uiteindelijk te fixen nadat ik later verder ging.
+De API van het loyaliteitssysteem heb ik uiteindelijk met Pitstop geïntegreerd d.m.v. Docker compose. Hiervoor heb ik de [Dockerfile](https://github.com/hanaim-devops/pitstop-groep-d/blob/main/src/LoyaltySystemAPI/Dockerfile) en de [bestaande Docker Compose](https://github.com/hanaim-devops/pitstop-groep-d/commit/56685a7be8d0c2f21a9060435c8774e5a55801ed) aangepast zodat de image op dezelfde manier als de andere bestaande microservices van Pitstop werd gebouwd. Het configureren duurde een stuk langer dan verwacht, voornamelijk omdat er toch [een aantal verschillen zaten bij de configuraties](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9) die ik samen met een teamgenoot gewoon niet zag. Dit wist ik uiteindelijk te fixen nadat ik later verder ging.
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
@@ -61,7 +52,7 @@ Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe 
 Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM  jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat [gebruik van Ansible in combi met Kubernetes](https://www.ansible.com/blog/how-useful-is-ansible-in-a-cloud-native-kubernetes-environment) niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
 
 - Tekton beschrijven (Linken naar ADR)
-  - Werkte niet (authenticatie Docker credentials niet goed doordat Pitstop niet in openbare repository binnen Docker registry stond) NOG WEL KIJKEN OF GITHUB REGISTRY WERKT - MAX 2u
+  - Werkte niet (authenticatie Docker credentials niet goed doordat Pitstop niet in openbare repository binnen Docker registry stond) NOG WEL KIJKEN OF GITHUB REGISTRY WERKT - MAX 2u (helaas niet werkend: ghcr.io login)
   - Beschrijven verdere potentie niet kunnen uitzoeken doordat veel tijd kwijt aan uitzoeken authenticatie met SSH en Docker credentials (v0.6 git-clone task)
   
 ## 5. Bijdrage code review/kwaliteit anderen en security
@@ -96,22 +87,9 @@ Beschrijf tijdens het project onder dit kopje ook evt. verdere activiteiten rond
 
 Competenties: *DevOps-7 - Attitude*
 
-Geef tot slot hier voor jezelf minimaal 2 en maximaal **4 tops** en 2 dito (2 tot 4) **tips** á la professional skills die je kunt meenemen in je verdere loopbaan. Beschrijf ook de voor jezelf er het meest uitspringende hulp of feedback van groepsgenoten die je (tot dusver) hebt gehad tijdens het project.
+Ik ben blij met de bijdrage en overdracht van de back-end API. Het heeft me veel tijd gekost om de back-end in elkaar te zetten, voornamelijk de configuratie van de API en de integratie met Pitstop. Hiervoor moest ik vaak een stuk langer doorwerken om dat voor elkaar te krijgen, waardoor de API uiteindelijk werkt. We hadden nog de gedachte om geen database te gebruiken omdat de connectie via EFCore gewoon niet goed ging. Ik heb veel doorgezet om het probleem uiteindelijk op te lossen.
 
-Top
-
-- Bijdrage kennis
-- Doorzetten
-  - Vaak problemen verder uitzoeken in vrije tijd
-
-Tips
-
-- Initiatief nemen
-  - Hulp aanbieden opzetten API
-  - Weten wanneer doorzetten te ver gaat
-- Doorzetten
-- Meer vragen naar domein expert
-- Progressie project bijhouden
+Dit is echter ook een valkuil tegelijk, want ik ben erg lang bezig geweest om Tekton CI/CD te integreren, maar het authenticeren binnen Tekton is mij uiteindelijk niet gelukt. Ik ben hier waarschijnlijk het meeste tijd kwijt voor geen resultaat, en ik heb hiervoor ook geen hulp gevraagd. Hiervoor had ik beter een domeinexpert kunnen vragen waarom het steeds niet lukte.
 
 ## 9. Conclusie & feedback
 
