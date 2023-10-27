@@ -1,9 +1,7 @@
 # Eigen bijdrage Kachung Li
 
 Als deliverable voor de individuele bijdrage in het beroepsproduct maak een eigen markdown bestand `<mijn-voornaam>.md` in je repo aan met tekst inclusief linkjes naar code en documentaties bestanden, pull requests, commit diffs. Maak hierin de volgende kopjes met een invulling.
- 
-Je schrapt verder deze tekst en vervangt alle andere template zaken, zodat alleen de kopjes over blijven. **NB: Aanwezigheid van template teksten na inleveren ziet de beoordelaar als een teken dat je documentatie nog niet af is, en hij/zij deze dus niet kan of hoeft te beoordelen**.
- 
+
 Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
 
 SAMENVATTING BIJDRAGE SCHRIJVEN
@@ -25,21 +23,21 @@ Competenties: *DevOps-1 Continuous Delivery*
 
 Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure specialist (Ops). Als Developer beschrijf en geef je links van minimaal 2 en maximaal 4 grootste bijdrages qua code functionaliteiten of non-functionele requirements. Idealiter werk je TDD (dus ook commit van tests en bijbehorende code tegelijk), maar je kunt ook linken naar geschreven automatische tests (unit tests, acceptance tests (BDD), integratie tests, end to end tests, performance/load tests, etc.). Als Opser geef je je minimaal 2 maximaal 4 belangrijkste bijdragen aan het opzetten van het Kubernetes platform, achterliggende netwerk infrastructuur of configuration management (MT) buiten Kubernetes (en punt 2).
 
-- Aanmaken API Loyaliteitssysteem met ASP.net Core. [Link](https://github.com/hanaim-devops/pitstop-groep-d/issues/6)
 - Aanmaken Models en DBContext voor gebruik EFCore.
 
-Voor code heb ik voornamelijk aan de API van het loyaliteitssysteem gewerkt.
+Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https://github.com/hanaim-devops/pitstop-groep-d/issues/6) gewerkt, voornamelijk [het opzetten hiervan] zodat mijn teamleden hiermee verder konden. Hierbij heb ik een aparte .Net Core API aangemaakt. Hierbij heb ik [het eerste model]() en [controller]() aangemaakt voor het loyaliteitssysteem. De controller had alleen een GET request om te testen of de API daadwerkelijk werkte. Ook heb ik de [integratie met EFCore]() ingebouwd zodat het makkelijk is om een databasetabel aan te maken d.m.v. het ORM systeem.
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
 Competenties: *DevOps-2 Orchestration, Containerization*
- 
+
 Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
 
 - Tekton YAML bestanden aanmaken voor het pullen van een git repo. Latere stappen nog uitvoeren (bijvoorbeeld docker image pushen naar Docker Registry)
 - Configuratie van loyaliteitsAPI zodat Pitstop gebruik maakt van die aparte microservice [Link naar commit]
 - Dockerfile aangemaakt en aangepast voor Loyaliteitssysteem
 
+De API van het loyaliteitssysteem heb ik uiteindelijk met Pitstop geïntegreerd d.m.v. Docker compose. Hiervoor heb ik de [Dockerfile]() en de [bestaande Docker Compose]() aangepast zodat de image op dezelfde manier als de andere bestaande microservices van Pitstop werd gebouwd. Het configureren duurde een stuk langer dan verwacht, voornamelijk omdat er toch [een aantal verschillen zaten bij de configuraties]() die ik samen met een teamgenoot gewoon niet zag. Dit wist ik uiteindelijk te fixen nadat ik later verder ging.
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
@@ -63,7 +61,9 @@ Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe 
 Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM  jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat [gebruik van Ansible in combi met Kubernetes](https://www.ansible.com/blog/how-useful-is-ansible-in-a-cloud-native-kubernetes-environment) niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
 
 - Tekton beschrijven (Linken naar ADR)
-
+  - Werkte niet (authenticatie Docker credentials niet goed doordat Pitstop niet in openbare repository binnen Docker registry stond) NOG WEL KIJKEN OF GITHUB REGISTRY WERKT - MAX 2u
+  - Beschrijven verdere potentie niet kunnen uitzoeken doordat veel tijd kwijt aan uitzoeken authenticatie met SSH en Docker credentials (v0.6 git-clone task)
+  
 ## 5. Bijdrage code review/kwaliteit anderen en security
 
 Competenties: *DevOps-7 - Attitude*, *DevOps-4 DevSecOps*
@@ -77,7 +77,7 @@ Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste *review a
 Competenties: *DevOps-6 Onderzoek*
 
 Zet hier een links naar en geef beschrijving van je C4 diagram of diagrammen, README of andere markdown bestanden, ADR's of andere documentatie. Bij andere markdown bestanden of doumentatie kun je denken aan eigen proces documentatie, zoals code standaarden, commit- of branchingconventies. Tot slot ook user stories en acceptatiecriteria (hopelijk verwerkt in gitlab issues en vertaalt naar `.feature` files) en evt. noemen en verwijzen naar handmatige test scripts/documenten.
- 
+
 - Code review naar C4 Diagram (link)
 - ADR geschreven voor Tekton waarom dit niet werkt (nog bijwerken)
 - 1 User story geschreven over downtime loyaltysystem ()
@@ -111,6 +111,7 @@ Tips
   - Weten wanneer doorzetten te ver gaat
 - Doorzetten
 - Meer vragen naar domein expert
+- Progressie project bijhouden
 
 ## 9. Conclusie & feedback
 
