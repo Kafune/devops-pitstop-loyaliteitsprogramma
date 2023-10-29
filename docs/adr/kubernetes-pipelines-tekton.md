@@ -12,8 +12,6 @@ Bij een CI/CD zoals Gitlab of Github Actions zit de pipeline standaard in de git
 
 Het configureren van Git en Docker credentials heeft veel tijd gekost, waarvan de Docker credentials waarschijnlijk gelukt is. De foutmelding geeft dit niet helemaal helder terug.
 
-![Foutmelding Docker Registry](./../img/tekton-kaniko-foutmelding.png)
-
 Hierdoor is het niet mogelijk om een image te bouwen en  Doordat we niet veel meer tijd hebben, is het verder niet waard om uit te zoeken waarom het niet werkt.
 
 **Update: mogelijke oplossing gevonden door gebruik te maken van Github registry om alle containers van pitstop daarin te zetten, zodat de pipeline daar toegang op heeft.**
