@@ -1,14 +1,16 @@
-﻿namespace WebApp.RESTClients;
+﻿using Pitstop.WebApp.RESTClients;
 
-public class LoyaltySystemAPI : ICustomerManagementAPI
+namespace WebApp.RESTClients;
+
+public class LoyaltySystemAPI : ILoyaltySystemAPI
 {
     private ILoyaltySystemAPI _restClient;
 
     public LoyaltySystemAPI(IConfiguration config, HttpClient httpClient)
     {
-        string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("CustomerManagementAPI");
+        string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("LoyaltySystemAPI");
         httpClient.BaseAddress = new Uri($"http://{apiHostAndPort}/api");
-        _restClient = RestService.For<ICustomerManagementAPI>(
+        _restClient = (ILoyaltySystemAPI)RestService.For<ILoyaltySystemAPI>(
             httpClient,
             new RefitSettings
             {
@@ -16,16 +18,16 @@ public class LoyaltySystemAPI : ICustomerManagementAPI
             });
     }
 
-    public async Task<List<Customer>> GetCustomers()
+    public async Task<List<Loyalty>> GetLoyalties()
     {
-        return await _restClient.GetCustomers();
+        return await _restClient.GetLoyalties();
     }
 
-    public async Task<Customer> GetCustomerById([AliasAs("id")] string customerId)
+    public async Task<Loyalty> GetById([AliasAs("id")] string customerId)
     {
         try
         {
-            return await _restClient.GetCustomerById(customerId);
+            return await _restClient.GetById(customerId);
         }
         catch (ApiException ex)
         {
@@ -40,8 +42,14 @@ public class LoyaltySystemAPI : ICustomerManagementAPI
         }
     }
 
-    public async Task RegisterCustomer(RegisterCustomer command)
+    public async Task AddCustomer(AddCustomer command)
     {
-        await _restClient.RegisterCustomer(command);
+        await _restClient.AddCustomer(command);
     }
+
+    public async Task AddPoints(AddPoints command)
+    {
+        await _restClient.AddPoints(command);
+    }
+
 }

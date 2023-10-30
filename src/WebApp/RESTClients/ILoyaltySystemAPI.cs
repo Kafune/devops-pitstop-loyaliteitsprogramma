@@ -2,13 +2,16 @@
 {
     public interface ILoyaltySystemAPI
     {
-        [Get("/loyalty")]
-        Task<List<Customer>> GetCustomers();
+        [Get("/Loyalty")]
+        Task<List<Loyalty>> GetLoyalties();
 
-        [Get("/customers/{id}")]
-        Task<Customer> GetCustomerById([AliasAs("id")] string customerId);
+        [Get("/Loyalty/GetById/{id}")]
+        Task<Loyalty> GetById([AliasAs("id")] string customerId);
 
-        [Post("/customers")]
-        Task RegisterCustomer(RegisterCustomer command);
+        [Post("/AddPoints")]
+        Task AddPoints(AddPoints command);
+
+        [Post("/AddPoints")]
+        Task AddCustomer(AddCustomer command);
     }
 }
