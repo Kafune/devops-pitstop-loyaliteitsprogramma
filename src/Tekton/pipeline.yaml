@@ -4,18 +4,24 @@ metadata:
   name: clone-read
 spec:
   description: | 
-    This pipeline clones a git repo, then echoes the README file to the stout.
+    This pipeline clones a git repo, builds a Docker image with Kaniko and
+    pushes it to a registry    
   params:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
+  - name: image-reference
+    type: string
+    default: hanaim-devops/loyaltysystemapi:1.0
   workspaces:
   - name: shared-data
     description: | 
       This workspace contains the cloned repo files, so they can be read by the
       next task.
-  - name: git-credentials
-    description: My ssh credentials
+  - name: git-secret
+    description: SSH key for git repo access.
+  - name: docker-credentials
+    description: Docker credentials for pushing the image.
   tasks:
   - name: fetch-source
     taskRef:
@@ -24,14 +30,31 @@ spec:
     - name: output
       workspace: shared-data
     - name: ssh-directory
-      workspace: git-credentials
+      workspace: git-secret
     params:
     - name: url
       value: $(params.repo-url)
-  - name: show-readme
+  # - name: show-readme
+  #   runAfter: ["fetch-source"]
+  #   taskRef:
+  #     name: show-readme
+  #   workspaces:
+  #   - name: source
+  #     workspace: shared-data
+  - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
-      name: show-readme
+      name: kaniko
     workspaces:
     - name: source
       workspace: shared-data
+    - name: dockerconfig
+      workspace: docker-credentials
+    params:
+    - name: IMAGE
+      value: $(params.image-reference)
+    - name: DOCKERFILE
+      value: $(workspace.source.path)/src/LoyalitySystemAPI/Dockerfile
+    - name: BUILDER_IMAGE
+      value: gcr.io/kaniko-project/executor:v1.7.0
+   

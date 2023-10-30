@@ -8,3 +8,4 @@ docker push pitstop/invoiceservice:1.0
 docker push pitstop/auditlogservice:1.0
 docker push pitstop/workshopmanagementapi:1.0
 docker push pitstop/vehiclemanagementapi:1.0
+docker push kafune/loyaltysystemapi:1.0

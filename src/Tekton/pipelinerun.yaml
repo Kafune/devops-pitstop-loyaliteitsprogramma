@@ -3,6 +3,7 @@ kind: PipelineRun
 metadata:
   generateName: clone-read-run-
 spec:
+  serviceAccountName: git-docker-service-account
   pipelineRef:
     name: clone-read
   podTemplate:
@@ -17,9 +18,16 @@ spec:
         resources:
           requests:
             storage: 1Gi
-  - name: git-credentials
+  - name: git-secret
     secret:
       secretName: git-secret
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
   params:
   - name: repo-url
-    value: https://github.com/EdwinVW/pitstop.git
+    value: git@github.com:hanaim-devops/pitstop-groep-d.git
+  - name: image-reference
+    value: ghrc.io/kafune/loyaltysystemapi:1.0
+  - name: image-name-tag
+    value: loyaltysystemapi:1.0
