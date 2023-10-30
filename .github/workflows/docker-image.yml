@@ -46,7 +46,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
     
-    - run: cat src/vehiclemanagementapi/Dockerfile
+    - run: cat src/VehicleManagementAPI/Dockerfile
 
     - name: Set up Docker Compose
       run: docker-compose -f src/docker-compose.yml build --no-cache
