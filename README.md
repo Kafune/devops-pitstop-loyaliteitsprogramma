@@ -6,7 +6,9 @@
 
 ## 1. Code/platform bijdrage
 
-De back end van de loyaliteitsAPI werkte niet met Swagger, dat heb ik opgelost. AddCustomer toegevoegd aan loyaliteitsAPI.
+- De back end van de loyaliteitsAPI werkte niet met Swagger, dat heb ik opgelost. 
+- AddCustomer toegevoegd aan loyalityManagementAPI
+- Loyalty Management frontend gemaakt en geimplementeerd met backend. Controllers/View/Viewmodel etc. 
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
