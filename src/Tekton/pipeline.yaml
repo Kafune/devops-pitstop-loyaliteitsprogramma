@@ -12,7 +12,7 @@ spec:
     description: The git repo URL to clone from.
   - name: image-reference
     type: string
-    default: index.docker.io/kafune/loyaltysystemapi:1.0
+    default: hanaim-devops/loyaltysystemapi:1.0
   workspaces:
   - name: shared-data
     description: | 
@@ -37,13 +37,10 @@ spec:
   # - name: show-readme
   #   runAfter: ["fetch-source"]
   #   taskRef:
-  #     name: build-push-docker-image
+  #     name: show-readme
   #   workspaces:
   #   - name: source
   #     workspace: shared-data
-  #   params:
-  #   - name: image-name-tag
-  #     value: $(params.image-name-tag)
   - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
@@ -57,6 +54,11 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
     - name: DOCKERFILE
+<<<<<<< HEAD
       value: $(workspaces.source.path)/src/LoyaltySystemAPI/Dockerfile
+=======
+      value: $(workspace.source.path)/src/LoyalitySystemAPI/Dockerfile
+>>>>>>> cc8e604c4509c190e145c7b9647d4d9942373892
     - name: BUILDER_IMAGE
       value: gcr.io/kaniko-project/executor:v1.7.0
+   
