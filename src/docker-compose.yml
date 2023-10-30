@@ -41,7 +41,7 @@ services:
       - ACCEPT_EULA=Y
 
   vehiclemanagementapi:
-    image: hanaim-devops/vehiclemanagementapi:1.0
+    image: ghcr.io/hanaim-devops/vehiclemanagementapi:1.0
     build: VehicleManagementAPI
     depends_on:
       - rabbitmq
