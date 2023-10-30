@@ -1,0 +1,30 @@
+﻿@model Pitstop.WebApp.ViewModels.LoyaltyManagementViewModel
+@{
+    ViewData["Title"] = "LoyaltyProgram Page";
+}
+
+<div>
+    <img src="~/images/banner.jpg" />
+    <h3 id="PageTitle">Pitstop - Garage Management System</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CustomerId</th>
+                <th>Points</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loyalty in Model.Loyalty)
+        {
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "LoyaltyManagement", new { id = loyalty.CustomerId }))'">
+                <td>@loyalty.CustomerId</td>
+                <td>@loyalty.Points</td>
+                <td>@loyalty.Category</td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+    <p>Version: @System.Reflection.Assembly.GetEntryAssembly().GetName().Version</p>
+</div>

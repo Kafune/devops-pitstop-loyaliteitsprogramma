@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheusnodeexporter
+    version: v1
+  name: prometheusnodeexporter
+  namespace: pitstop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheusnodeexporter
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prometheusnodeexporter
+    spec:
+      containers:
+        - image: prom/node-exporter
+          name: prometheusnodeexporter
+          ports:
+            - containerPort: 9100
+              hostPort: 9100
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheusnodeexporter
+  name: prometheusnodeexporter
+  namespace: pitstop
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9100
+      targetPort: 9100
+  selector:
+    app: prometheusnodeexporter

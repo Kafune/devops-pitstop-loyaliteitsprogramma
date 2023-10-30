@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore;
 
-namespace LoyalitySystemAPI.Models
+namespace LoyaltySystemAPI.Models
 {
     public class LoyaltyContext : DbContext
     {

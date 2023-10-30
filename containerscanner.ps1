@@ -15,9 +15,10 @@ $imagesToScan = @(
 function Scan-Image {
     param($image)
     $imageName = $image.Substring(8, $image.Length - 9)
-    $TRIVY_REPORT = "$imageName-trivy-rapport.JSON"
+    $rapport = "trivy-rapport.JSON"
+    $TRIVY_REPORT = "$imageName"+$rapport
     Write-Output "Scannen van image: $image"
-    trivy image -f json -o $TRIVY_REPORT $image
+    trivy image -f json -o $rapport $image
 }
 
 
