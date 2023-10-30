@@ -190,3 +190,37 @@ Time Service: Service that informs other services when a certain time-period has
 Invoicing: Creates an invoice for all maintenance jobs that have been finished (and are not yet invoiced). 
 Notifications: The notification service sends a notification to every customer that has a maintenance job planned on the current day.
 Auditlog: Picks up all events from the message-broker and stores them for later reference.
+
+## Container diagram
+
+### Loyalty program diagram
+
+```mermaid
+C4Container
+    Container_Boundary(c1, "Loyalty program") {
+        ContainerDb(DatabaseA, Database, "")
+        Container(SystemA, API, "")
+    }
+    Person(Employee, Employee, "Employee working for pitstop")
+    System_Ext(SystemB, Pitstop Web APP, "")
+    Rel_D(SystemB, SystemA, "Request from")
+    Rel_R(SystemA, DatabaseA, "Queries")
+    Rel_D(Employee, SystemB, "Uses")
+```
+
+## Component diagram
+
+### Loyalty program diagram
+
+```mermaid
+    C4Component
+    Container(spa, "System web app", "")
+    ContainerDb(db, "Database", "Relational Database Schema", "Stores all the data for the loyalty program")
+
+    Container_Boundary(api, "API Application") {
+        Component(sign, "LoyaltyController", "MVC Rest Controller", "Allows users to sign in to the internet banking system")
+    }
+
+    Rel_Back(spa, sign, "Uses", "JSON/HTTPS")
+    Rel(sign, db, "queries")
+```
