@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pitstop.CustomerManagementAPI.DataAccess;
 
@@ -10,9 +11,11 @@ using Pitstop.CustomerManagementAPI.DataAccess;
 namespace Pitstop.CustomerManagementAPI.DataAccess
 {
     [DbContext(typeof(CustomerManagementDBContext))]
-    partial class CustomerManagementDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231026141912_customer")]
+    partial class customer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
