@@ -1,4 +1,6 @@
-﻿namespace WebApp.RESTClients;
+﻿using Pitstop.WebApp.RESTClients;
+
+namespace WebApp.RESTClients;
 
 public class LoyaltySystemAPI : ICustomerManagementAPI
 {
@@ -8,7 +10,7 @@ public class LoyaltySystemAPI : ICustomerManagementAPI
     {
         string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("CustomerManagementAPI");
         httpClient.BaseAddress = new Uri($"http://{apiHostAndPort}/api");
-        _restClient = RestService.For<ICustomerManagementAPI>(
+        _restClient = (ILoyaltySystemAPI)RestService.For<ICustomerManagementAPI>(
             httpClient,
             new RefitSettings
             {

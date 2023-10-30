@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Pitstop.WebApp.RESTClients;
+
+var builder = WebApplication.CreateBuilder(args);
 
 //builder.UseKestrel();
 builder.Host.UseContentRoot(Directory.GetCurrentDirectory());

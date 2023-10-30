@@ -1,3 +1,5 @@
+using Pitstop.WebApp.RESTClients;
+
 namespace PitStop.WebApp.Controllers;
 
 public class CustomerManagementController : Controller
