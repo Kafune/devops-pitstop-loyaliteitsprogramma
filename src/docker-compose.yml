@@ -163,6 +163,8 @@ services:
 
   grafana:
     image: grafana/grafana
+    volumes:
+      - grafanadata:/var/lib/grafana
     expose:
       - 3000
     ports:
@@ -172,4 +174,6 @@ volumes:
   sqlserverdata:
     external: true
   rabbitmqdata:
+    external: true
+  grafanadata:
     external: true
