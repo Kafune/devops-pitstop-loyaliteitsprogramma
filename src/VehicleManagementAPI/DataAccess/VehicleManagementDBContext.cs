@@ -40,6 +40,27 @@ public class VehicleManagementDBContext : DbContext
                     Brand = "Chevrolet",
                     Type = "Convertible",
                     OwnerId = "4"
+                },
+                 new Vehicle
+                {
+                    LicenseNumber = "102JKL",
+                    Brand = "Chevrolet",
+                    Type = "Convertible",
+                    OwnerId = "5"
+                },
+                 new Vehicle
+                {
+                    LicenseNumber = "166JKL",
+                    Brand = "Chevrolet",
+                    Type = "Convertible",
+                    OwnerId = "6"
+                },
+                 new Vehicle
+                {
+                    LicenseNumber = "009JKL",
+                    Brand = "Chevrolet",
+                    Type = "Convertible",
+                    OwnerId = "7"
                 }
             );
         base.OnModelCreating(builder);

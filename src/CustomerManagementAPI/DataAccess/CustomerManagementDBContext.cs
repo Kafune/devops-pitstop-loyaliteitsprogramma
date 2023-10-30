@@ -53,6 +53,46 @@ public class CustomerManagementDBContext : DbContext
                     City = "Final City",
                     TelephoneNumber = "999-888-7777",
                     EmailAddress = "alice.brown@example.com"
+                },
+                 new Customer
+                {
+                    CustomerId = "5",
+                    Name = "Jack Brown",
+                    Address = "101 Pine Street",
+                    PostalCode = "13579",
+                    City = "Final City",
+                    TelephoneNumber = "999-888-7777",
+                    EmailAddress = "jack.brown@example.com"
+                },
+                 new Customer
+                {
+                    CustomerId = "6",
+                    Name = "Caitlin Brown",
+                    Address = "101 Pine Street",
+                    PostalCode = "13579",
+                    City = "Final City",
+                    TelephoneNumber = "999-888-7777",
+                    EmailAddress = "Caitlin.brown@example.com"
+                },
+                 new Customer
+                {
+                    CustomerId = "7",
+                    Name = "James Brown",
+                    Address = "101 Pine Street",
+                    PostalCode = "13579",
+                    City = "Final City",
+                    TelephoneNumber = "999-888-7777",
+                    EmailAddress = "james.brown@example.com"
+                },
+                 new Customer
+                {
+                    CustomerId = "8",
+                    Name = "John Brown",
+                    Address = "101 Pine Street",
+                    PostalCode = "13579",
+                    City = "Final City",
+                    TelephoneNumber = "999-888-7777",
+                    EmailAddress = "john.brown@example.com"
                 }
             );
         base.OnModelCreating(builder);
