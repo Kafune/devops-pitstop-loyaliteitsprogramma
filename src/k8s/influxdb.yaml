@@ -9,13 +9,17 @@ spec:
   selector:
     matchLabels:
       app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
     spec:
       containers:
-        - name: influxdb
-          image: influxdb:latest
-          ports:
-            - containerPort: 8086
-            - containerPort: 8089
+      - name: influxdb
+        image: influxdb:latest
+        ports:
+          - containerPort: 8086
+            
 
 ---
 # InfluxDB Service
@@ -32,6 +36,3 @@ spec:
     - protocol: TCP
       port: 8086
       targetPort: 8086
-    - protocol: TCP
-      port: 8089
-      targetPort: 8089

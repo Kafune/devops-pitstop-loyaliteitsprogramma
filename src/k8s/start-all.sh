@@ -53,4 +53,5 @@ kubectl apply \
     -f ./webapp$MESHPOSTFIX.yaml \
     -f ./prometheus.yaml \
     -f ./node-exporter.yaml \
-    -f ./grafana.yaml
+    -f ./grafana.yaml \
+    -f ./influxdb.yaml
