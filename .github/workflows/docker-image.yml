@@ -50,6 +50,8 @@ jobs:
     
     - run: cat src/VehicleManagementAPI/Dockerfile
 
+    - run: git branch
+
     - name: Set up Docker Compose
       run: docker-compose -f src/docker-compose.yml build --no-cache
     
