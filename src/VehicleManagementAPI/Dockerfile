@@ -1,4 +1,4 @@
-FROM ghcr.io/hanaim-devops/pitstop-dotnet-sdk-base:1.0 AS build-env
+FROM pitstop-dotnet-sdk-base:1.0 AS build-env
 WORKDIR /app
 
 # Copy necessary files and restore as distinct layer
@@ -10,7 +10,7 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM ghcr.io/hanaim-devops/pitstop-dotnet-aspnet-base:1.0
+FROM pitstop-dotnet-aspnet-base:1.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
