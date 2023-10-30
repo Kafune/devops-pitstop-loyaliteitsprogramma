@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace LoyalitySystemAPI.Migrations
+namespace LoyaltySystemAPI.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

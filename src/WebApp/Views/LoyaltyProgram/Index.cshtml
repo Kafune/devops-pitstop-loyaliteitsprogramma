@@ -1,9 +1,32 @@
-﻿@{
+﻿@model Pitstop.WebApp.ViewModels.CustomerManagementViewModel
+
+@{
     ViewData["Title"] = "LoyaltyProgram Page";
 }
 
 <div>
     <img src="~/images/banner.jpg" />
     <h3 id="PageTitle">Pitstop - Garage Management System</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Emailaddress</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+        {
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "CustomerManagement", new { id = customer.CustomerId }))'">
+                <td>@customer.Name</td>
+                <td>@customer.Address</td>
+                <td>@customer.City</td>
+                <td>@customer.EmailAddress</td>
+            </tr>
+        }
+        </tbody>
+    </table>
     <p>Version: @System.Reflection.Assembly.GetEntryAssembly().GetName().Version</p>
 </div>

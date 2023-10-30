@@ -1,4 +1,4 @@
-﻿namespace LoyalitySystemAPI.Models
+﻿namespace LoyaltySystemAPI.Models
 {
     public class CustomerDto
     {

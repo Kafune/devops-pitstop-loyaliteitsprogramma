@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace LoyalitySystemAPI.Models
+namespace LoyaltySystemAPI.Models
 {
     public class Loyalty
     {

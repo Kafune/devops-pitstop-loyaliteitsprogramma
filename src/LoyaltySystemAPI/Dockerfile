@@ -20,4 +20,4 @@ ENV ASPNETCORE_URLS http://*:5300
 HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail http://localhost:5300/hc || exit 1
 
 # Start
-ENTRYPOINT ["dotnet", "LoyalitySystemAPI.dll"]
+ENTRYPOINT ["dotnet", "LoyaltySystemAPI.dll"]

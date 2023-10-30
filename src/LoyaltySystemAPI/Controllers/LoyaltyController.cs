@@ -6,6 +6,7 @@ namespace LoyaltySystemAPI.Controllers
     [ApiController]
     public class LoyaltyController : ControllerBase
     {
+        LoyaltyContext _dbContext;
 
         public LoyaltyController(LoyaltyContext dbContext)
         {
@@ -21,6 +22,7 @@ namespace LoyaltySystemAPI.Controllers
             return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
+        // GET api/<LoyaltyController>/5
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -81,13 +83,10 @@ namespace LoyaltySystemAPI.Controllers
                 return BadRequest("Invalid customer data");
             }
 
-            // Map the DTO to your Loyalty entity or create a new Loyalty entity
             var loyalty = new Loyalty
             {
                 CustomerID = customerDto.CustomerID,
-                // Set other properties of the loyalty entity based on the customerDto
-                // For example: loyalty.Name = customerDto.Name;
-                // Set default points and category if needed
+             
                 Points = "0",
                 Category = "Zilver"
             };
@@ -97,20 +96,6 @@ namespace LoyaltySystemAPI.Controllers
             await _dbContext.SaveChangesAsync();
 
             return Ok($"Customer with ID {customerDto.CustomerID} added successfully");
-        }
-
-
-
-        // PUT api/<LoyaltyController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<LoyaltyController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

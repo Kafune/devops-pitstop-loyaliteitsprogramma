@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f ..\docker-compose.yml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: notificationservice
+  name: notificationservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: notificationservice
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert -f ..\docker-compose.yml
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/src-default: "true"
+        io.kompose.service: notificationservice
+    spec:
+      containers:
+        - env:
+            - name: DOTNET_ENVIRONMENT
+              value: Production
+          image: pitstop/notificationservice:1.0
+          name: notificationservice
+          resources: {}
+      restartPolicy: Always
+status: {}
