@@ -57,6 +57,6 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
     - name: DOCKERFILE
-      value: $(workspaces.source.path)/src/LoyalitySystemAPI/Dockerfile
+      value: $(workspaces.source.path)/src/LoyaltySystemAPI/Dockerfile
     - name: BUILDER_IMAGE
       value: gcr.io/kaniko-project/executor:v1.7.0

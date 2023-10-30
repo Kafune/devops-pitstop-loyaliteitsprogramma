@@ -1,4 +1,4 @@
-﻿namespace WebApp.RESTClients;
+﻿namespace Pitstop.WebApp.RESTClients;
 
 public interface ICustomerManagementAPI
 {

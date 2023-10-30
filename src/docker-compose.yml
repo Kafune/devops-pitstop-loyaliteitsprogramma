@@ -75,7 +75,7 @@ services:
   
   loyaltysystemapi:
     image: loyaltysystemapi:latest
-    build: LoyalitySystemAPI
+    build: LoyaltySystemAPI
     depends_on:
       - rabbitmq
       - sqlserver
