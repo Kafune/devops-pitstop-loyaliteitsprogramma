@@ -47,7 +47,7 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Set up Docker Compose
-      run: docker-compose -f src/docker-compose.yml up -d
+      run: docker-compose -f src/docker-compose.yml build
     
     - name: Build and push
       uses: docker/build-push-action@v5
