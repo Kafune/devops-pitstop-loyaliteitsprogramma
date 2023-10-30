@@ -1,4 +1,20 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /mnt/sda1/data/grafana
+
+---
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: grafana-pvc
@@ -7,18 +23,18 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
+  storageClassName: standard
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: grafana
   name: grafana
   namespace: pitstop
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: grafana
@@ -27,61 +43,31 @@ spec:
       labels:
         app: grafana
     spec:
-      securityContext:
-        fsGroup: 472
-        supplementalGroups:
-          - 0
       containers:
-        - name: grafana
-          image: grafana/grafana:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 3000
-              name: http-grafana
-              protocol: TCP
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /robots.txt
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            successThreshold: 1
-            timeoutSeconds: 2
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: 3000
-            timeoutSeconds: 1
-          resources:
-            requests:
-              cpu: 250m
-              memory: 750Mi
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-pv
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+            - name: grafana-data
+              mountPath: /var/lib/grafana
       volumes:
-        - name: grafana-pv
+        - name: grafana-data
           persistentVolumeClaim:
             claimName: grafana-pvc
 
 ---
-
+# Grafana Service
 apiVersion: v1
 kind: Service
 metadata:
   name: grafana
   namespace: pitstop
 spec:
-  ports:
-    - port: 3000
-      protocol: TCP
-      targetPort: http-grafana
   selector:
     app: grafana
-  sessionAffinity: None
   type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
