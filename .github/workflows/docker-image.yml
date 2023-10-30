@@ -51,11 +51,14 @@ jobs:
     - run: cat src/VehicleManagementAPI/Dockerfile
 
     - name: Set up Docker Compose
-      run: docker-compose -f src/docker-compose.yml build --no-cache
+      run: docker-compose -f src/docker-compose.yml build --no-cache'
+
+    - name: Build Docker Compose images
+      run: docker-compose push
     
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        context: ./src
-        push: true
-        tags: hanaim-devops/loyaltysystemapi:1.0
+    # - name: Build and push
+    #   uses: docker/build-push-action@v5
+    #   with:
+    #     context: ./src
+    #     push: true
+    #     tags: hanaim-devops/loyaltysystemapi:1.0
