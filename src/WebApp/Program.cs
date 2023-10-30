@@ -24,6 +24,8 @@ builder.Services.AddHealthChecks();
 builder.Services.AddHttpClient<ICustomerManagementAPI, CustomerManagementAPI>();
 builder.Services.AddHttpClient<IVehicleManagementAPI, VehicleManagementAPI>();
 builder.Services.AddHttpClient<IWorkshopManagementAPI, WorkshopManagementAPI>();
+builder.Services.AddHttpClient<ILoyaltySystemAPI, LoyaltySystemAPI>();
+
 
 var app = builder.Build();
 

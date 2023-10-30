@@ -18,12 +18,12 @@ public class LoyaltySystemAPI : ILoyaltySystemAPI
             });
     }
 
-    public async Task<List<Customer>> GetLoyalties()
+    public async Task<List<Loyalty>> GetLoyalties()
     {
         return await _restClient.GetLoyalties();
     }
 
-    public async Task<Customer> GetById([AliasAs("id")] string customerId)
+    public async Task<Loyalty> GetById([AliasAs("id")] string customerId)
     {
         try
         {

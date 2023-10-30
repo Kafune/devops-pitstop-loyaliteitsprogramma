@@ -3,10 +3,10 @@
     public interface ILoyaltySystemAPI
     {
         [Get("/Loyalty")]
-        Task<List<Customer>> GetLoyalties();
+        Task<List<Loyalty>> GetLoyalties();
 
         [Get("/Loyalty/GetById/{id}")]
-        Task<Customer> GetById([AliasAs("id")] string customerId);
+        Task<Loyalty> GetById([AliasAs("id")] string customerId);
 
         [Post("/AddPoints")]
         Task AddPoints(AddPoints command);
