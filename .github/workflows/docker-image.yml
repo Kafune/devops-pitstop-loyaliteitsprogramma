@@ -53,6 +53,9 @@ jobs:
     - name: Set up Docker Compose
       run: docker-compose -f src/docker-compose.yml build
 
+    - name: Change directory
+      run: cd src
+
     - name: Build Docker Compose images
       run: docker-compose push
     
