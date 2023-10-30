@@ -7,11 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ref: feature/actions-docker-registry
-        clean: true
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
+    #   with:
+    #     ref: feature/actions-docker-registry
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
