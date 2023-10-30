@@ -1,4 +1,4 @@
-FROM pitstop-dotnet-sdk-base:1.0 AS build-env
+FROM ghcr.io/hanaim-devops/pitstop-dotnet-sdk-base:1.0 AS build-env
 WORKDIR /app
 
 # Install node
@@ -25,7 +25,7 @@ RUN gulp default
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
-FROM pitstop-dotnet-aspnet-base:1.0
+FROM ghcr.io/hanaim-devops/pitstop-dotnet-aspnet-base:1.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
