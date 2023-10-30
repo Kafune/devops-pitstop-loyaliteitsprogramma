@@ -207,3 +207,20 @@ C4Container
     Rel_R(SystemA, DatabaseA, "Queries")
     Rel_D(Employee, SystemB, "Uses")
 ```
+
+## Component diagram
+
+### Loyalty program diagram
+
+```mermaid
+    C4Component
+    Container(spa, "System web app", "")
+    ContainerDb(db, "Database", "Relational Database Schema", "Stores all the data for the loyalty program")
+
+    Container_Boundary(api, "API Application") {
+        Component(sign, "LoyaltyController", "MVC Rest Controller", "Allows users to sign in to the internet banking system")
+    }
+
+    Rel_Back(spa, sign, "Uses", "JSON/HTTPS")
+    Rel(sign, db, "queries")
+```
