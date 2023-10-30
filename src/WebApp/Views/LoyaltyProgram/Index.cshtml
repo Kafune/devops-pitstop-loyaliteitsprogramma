@@ -1,4 +1,4 @@
-﻿@model Pitstop.WebApp.ViewModels.CustomerManagementViewModel
+﻿@model Pitstop.WebApp.ViewModels.LoyaltyManagementViewModel
 
 @{
     ViewData["Title"] = "LoyaltyProgram Page";
@@ -10,20 +10,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Emailaddress</th>
+                <th>CustomerId</th>
+                <th>Points</th>
+                <th>Category</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model.Customers)
+            @foreach (var loyalty in Model.Loyalty)
         {
-            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "CustomerManagement", new { id = customer.CustomerId }))'">
-                <td>@customer.Name</td>
-                <td>@customer.Address</td>
-                <td>@customer.City</td>
-                <td>@customer.EmailAddress</td>
+            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "LoyaltyManagement", new { id = loyalty.CustomerId }))'">
+                <td>@loyalty.CustomerId</td>
+                <td>@loyalty.Points</td>
+                <td>@loyalty.Category</td>
+
             </tr>
         }
         </tbody>

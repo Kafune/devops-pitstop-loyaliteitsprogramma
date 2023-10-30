@@ -2,15 +2,15 @@
 using System.Net;
 using System.Xml.Linq;
 
-namespace Pitstop.WebApp.Commands
+namespace Pitstop.WebApp.Commands;
+
+public class AddCustomer : Command 
 {
-    public class AddCustomer
+    public readonly string CustomerId;
+
+    public AddCustomer(Guid messageId, string customerId) : base(messageId)
     {
-        public readonly string CustomerId;
-        public AddCustomer(Guid messageId, string customerId) : base(messageId)
-        {
-            CustomerId = customerId;
-            
-        }
+        CustomerId = customerId;
+
     }
 }
