@@ -1,4 +1,34 @@
-# Grafana Deployment
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: grafana-pv
+# spec:
+#   capacity:
+#     storage: 10Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: standard
+#   hostPath:
+#     path: /mnt/data
+
+# ---
+
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: grafana-pvc
+#   namespace: pitstop
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi
+#   storageClassName: standard
+
+# ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
