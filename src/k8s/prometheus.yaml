@@ -1,51 +1,21 @@
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: prometheus-pv
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard
-  hostPath:
-    path: /mnt/sda1/data/prometheus
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: prometheus-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: standard
-
----
-
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
+  namespace: pitstop
 data:
   prometheus.yml: |
     global:
-    scrape_interval: 1m
-    scrape_configs:
-    - job_name: 'prometheus'
-    scrape_interval: 1m
-    static_configs:
-    - targets: ['prometheus:9090']
+      scrape_interval: 1m
 
-    - job_name: 'node'
-    scrape_interval: 1m
-    static_configs:
-    - targets: ['node:9100']
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['prometheus:9090']
+
+      - job_name: 'node'
+        static_configs:
+          - targets: ['node:9100']
 
 ---
 
@@ -75,17 +45,12 @@ spec:
         ports:
         - containerPort: 9090
         volumeMounts:
-            - name: prometheus-config-volume
-              mountPath: /etc/prometheus/
-            - name: prometheus-volume
-              mountPath: /prometheus
-      volumes:
         - name: prometheus-config-volume
-          configMap:
-            name: prometheus-config
-        - name: prometheus-volume
-          persistentVolumeClaim:
-             claimName: prometheus-pvc
+          mountPath: /etc/prometheus/
+      volumes:
+      - name: prometheus-config-volume
+        configMap:
+          name: prometheus-config
       restartPolicy: Always
 
 ---
