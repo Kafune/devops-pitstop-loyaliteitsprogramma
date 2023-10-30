@@ -201,9 +201,9 @@ C4Container
         ContainerDb(DatabaseA, Database, "")
         Container(SystemA, API, "")
     }
+    Person(Employee, Employee, "Employee working for pitstop")
     System_Ext(SystemB, Pitstop Web APP, "")
-    System_Ext(SystemC, Message Broker, "")
     Rel_D(SystemB, SystemA, "Request from")
     Rel_R(SystemA, DatabaseA, "Queries")
-    Rel_D(SystemA, SystemC, "Uses")
+    Rel_D(Employee, SystemB, "Uses")
 ```
