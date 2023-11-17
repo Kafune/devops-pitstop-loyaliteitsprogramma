@@ -4,5 +4,9 @@
     {
         public IEnumerable<Loyalty> Loyalty { get; set; }
 
+        public List<LoyaltyCombined> LoyaltyCombined { get; set; }
+        
+
+
     }
 }

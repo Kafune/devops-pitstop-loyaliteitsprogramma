@@ -5,12 +5,14 @@ namespace PitStop.WebApp.Controllers;
 public class CustomerManagementController : Controller
 {
     private readonly ICustomerManagementAPI _customerManagementAPI;
+    private readonly ILoyaltySystemAPI _loyaltySystemAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
 
-    public CustomerManagementController(ICustomerManagementAPI customerManagementAPI, ILogger<CustomerManagementController> logger)
+    public CustomerManagementController(ICustomerManagementAPI customerManagementAPI, ILoyaltySystemAPI loyaltySystemAPI, ILogger<CustomerManagementController> logger)
     {
         _customerManagementAPI = customerManagementAPI;
+        _loyaltySystemAPI = loyaltySystemAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
     }
@@ -60,6 +62,12 @@ public class CustomerManagementController : Controller
             {
                 RegisterCustomer cmd = inputModel.MapToRegisterCustomer();
                 await _customerManagementAPI.RegisterCustomer(cmd);
+
+                RegisterLoyaltyCustomer loyaltycmd = new RegisterLoyaltyCustomer(Guid.NewGuid(), cmd.CustomerId);
+                await _loyaltySystemAPI.AddCustomer(loyaltycmd);
+
+
+
                 return RedirectToAction("Index");
             }, View("Offline", new CustomerManagementOfflineViewModel()));
         }

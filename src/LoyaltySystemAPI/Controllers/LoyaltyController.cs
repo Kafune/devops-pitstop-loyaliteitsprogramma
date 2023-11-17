@@ -1,14 +1,17 @@
 ﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+using LoyaltySystemAPI.Commands;
+using LoyaltySystemAPI.Mappers;
+
 namespace LoyaltySystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class LoyaltyController : ControllerBase
     {
-        LoyaltyContext _dbContext;
+        LoyaltyDBContext _dbContext;
 
-        public LoyaltyController(LoyaltyContext dbContext)
+        public LoyaltyController(LoyaltyDBContext dbContext)
         {
             _dbContext = dbContext;
             Console.WriteLine(_dbContext);
@@ -76,26 +79,20 @@ namespace LoyaltySystemAPI.Controllers
 
         // POST api/<LoyaltyController>/AddCustomer
         [HttpPost("AddCustomer")]
-        public async Task<IActionResult> AddCustomer([FromBody] CustomerDto customerDto)
+        public async Task<IActionResult> AddCustomer([FromBody] RegisterLoyaltyCustomer registerLoyaltyCustomer)
         {
-            if (customerDto == null)
+            if (registerLoyaltyCustomer == null)
             {
                 return BadRequest("Invalid customer data");
             }
 
-            var loyalty = new Loyalty
-            {
-                CustomerID = customerDto.CustomerID,
-             
-                Points = "0",
-                Category = "Zilver"
-            };
+            Loyalty loyalty = registerLoyaltyCustomer.MapToLoyalty();
 
             // Add loyalty to the database
             _dbContext.Loyalties.Add(loyalty);
             await _dbContext.SaveChangesAsync();
 
-            return Ok($"Customer with ID {customerDto.CustomerID} added successfully");
+            return Ok($"Customer with ID {loyalty.CustomerID} added successfully");
         }
     }
 }

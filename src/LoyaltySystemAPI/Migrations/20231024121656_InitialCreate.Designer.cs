@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoyaltySystemAPI.Migrations
 {
-    [DbContext(typeof(LoyaltyContext))]
+    [DbContext(typeof(LoyaltyDBContext))]
     [Migration("20231024121656_InitialCreate")]
     partial class InitialCreate
     {

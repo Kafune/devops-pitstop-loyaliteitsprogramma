@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LoyaltySystemAPI.Models
 {
-    public class LoyaltyContext : DbContext
+    public class LoyaltyDBContext : DbContext
     {
         public DbSet<Loyalty> Loyalties{ get; set; }
-        public string DbPath { get; }
+        //public string DbPath { get; }
 
-        public LoyaltyContext(DbContextOptions<LoyaltyContext> options) : base(options)
+        public LoyaltyDBContext(DbContextOptions<LoyaltyDBContext> options) : base(options)
         {
 
         }

@@ -46,6 +46,10 @@ public class CustomersController : Controller
                 CustomerRegistered e = command.MapToCustomerRegistered();
                 await _messagePublisher.PublishMessageAsync(e.MessageType, e, "");
 
+                ////send event to loyaltyAPI
+                //LoyaltyCustomer loyaltyCustomer = command.MapToLoyaltyCustomer();
+                //await
+
                 // return result
                 return CreatedAtRoute("GetByCustomerId", new { customerId = customer.CustomerId }, customer);
             }

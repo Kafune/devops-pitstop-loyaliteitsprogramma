@@ -52,4 +52,8 @@ public class LoyaltySystemAPI : ILoyaltySystemAPI
         await _restClient.AddPoints(command);
     }
 
+    public async Task AddCustomer(RegisterLoyaltyCustomer command)
+    {
+        await _restClient.AddCustomer(command);
+    }
 }

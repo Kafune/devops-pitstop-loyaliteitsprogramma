@@ -13,5 +13,10 @@
 
         [Post("/AddPoints")]
         Task AddCustomer(AddCustomer command);
+
+        [Post("/Loyalty/AddCustomer")]
+        Task AddCustomer(RegisterLoyaltyCustomer command);
+
+
     }
 }

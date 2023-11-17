@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var sqlConnectionString = builder.Configuration.GetConnectionString("LoyaltyServiceCN");
-builder.Services.AddDbContext<LoyaltyContext>(options => options.UseSqlServer(sqlConnectionString));
+builder.Services.AddDbContext<LoyaltyDBContext>(options => options.UseSqlServer(sqlConnectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,6 +25,12 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoyaltyProgram API - v1");
 });
+
+// auto migrate db
+using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    scope.ServiceProvider.GetService<LoyaltyDBContext>().MigrateDB();
+}
 
 app.UseHttpsRedirection();
 

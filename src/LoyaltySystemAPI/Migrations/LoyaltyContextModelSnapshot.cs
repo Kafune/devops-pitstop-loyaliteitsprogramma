@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LoyaltySystemAPI.Migrations
 {
-    [DbContext(typeof(LoyaltyContext))]
+    [DbContext(typeof(LoyaltyDBContext))]
     partial class LoyaltyContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

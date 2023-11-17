@@ -21,4 +21,9 @@ public static class Mappers
         source.Vehicle.Type,
         source.SelectedCustomerId
     );
+
+    //public static RegisterLoyaltyCustomer MapToRegisterLoyaltyCustomer(this CustomerManagementViewModel source) => new RegisterLoyaltyCustomer(
+    //    Guid.NewGuid(),
+    //    source.Customer
+    //    )
 }
