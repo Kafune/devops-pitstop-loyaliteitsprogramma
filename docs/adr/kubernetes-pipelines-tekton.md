@@ -18,7 +18,7 @@ Hierdoor is het niet mogelijk om een image te bouwen en  Doordat we niet veel me
 
 ## Decision
 
-Schrappen van Tekton CI/CD voor het pitstop project wegens beperkte tijd.
+Schrappen van Tekton CI/CD voor het pitstop project wegens beperkte tijd. Het deployment via pipelines vervangen door Github Actions
 
 ## Consequences
 

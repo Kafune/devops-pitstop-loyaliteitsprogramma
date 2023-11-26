@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
-kind: PipelineRun
+kind: TaskRun
 metadata:
-  generateName: deploy-image-run-
+  name: deploy-image-task-run-
 spec:
   serviceAccountName: git-docker-service-account
-  pipelineRef:
-    name: clone-build-push
+  taskRef:
+    name: deploy-image-task
   podTemplate:
     securityContext:
       fsGroup: 65532
@@ -21,13 +21,13 @@ spec:
   # - name: git-secret
   #   secret:
   #     secretName: git-secret
-  - name: docker-credentials
-    secret:
-      secretName: docker-credentials
+  # - name: docker-credentials
+  #   secret:
+  #     secretName: docker-credentials
   params:
   - name: repo-url
-    value: git@github.com:hanaim-devops/pitstop-groep-d.git
+    value:
   - name: image-reference
-    value: ghcr.io/hanaim-devops/loyaltysystemapi:1.0
+    value:
   - name: image-name-tag
-    value: loyaltysystemapi:1.0
+    value:
