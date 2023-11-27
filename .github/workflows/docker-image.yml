@@ -54,5 +54,5 @@ jobs:
       with:
         context: ./src/LoyaltySystemAPI
         push: true
-        tags: hanaim-devops/loyaltysystemapi:1.0
+        tags: ghcr.io/hanaim-devops/loyaltysystemapi:1.0
         file: ./src/LoyaltySystemAPI/Dockerfile
