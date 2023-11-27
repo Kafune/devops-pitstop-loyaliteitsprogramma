@@ -1,25 +1,26 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: clone-read
+  name: clone-build-push
 spec:
   description: | 
     This pipeline clones a git repo, builds a Docker image with Kaniko and
-    pushes it to a registry    
+    pushes it to a registry
   params:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
   - name: image-reference
     type: string
-    default: index.docker.io/kafune/loyaltysystemapi:1.0
+    description: The image registry to push the image to.
+    # default: hanaim-devops/loyaltysystemapi:1.0
   workspaces:
   - name: shared-data
     description: | 
       This workspace contains the cloned repo files, so they can be read by the
       next task.
-  - name: git-secret
-    description: SSH key for git repo access.
+  # - name: git-secret
+  #   description: SSH key for git repo access.
   - name: docker-credentials
     description: Docker credentials for pushing the image.
   tasks:
@@ -29,21 +30,11 @@ spec:
     workspaces:
     - name: output
       workspace: shared-data
-    - name: ssh-directory
-      workspace: git-secret
+    # - name: ssh-directory
+    #   workspace: git-secret
     params:
     - name: url
       value: $(params.repo-url)
-  # - name: show-readme
-  #   runAfter: ["fetch-source"]
-  #   taskRef:
-  #     name: build-push-docker-image
-  #   workspaces:
-  #   - name: source
-  #     workspace: shared-data
-  #   params:
-  #   - name: image-name-tag
-  #     value: $(params.image-name-tag)
   - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
@@ -57,6 +48,7 @@ spec:
     - name: IMAGE
       value: $(params.image-reference)
     - name: DOCKERFILE
-      value: $(workspaces.source.path)/src/LoyalitySystemAPI/Dockerfile
-    - name: BUILDER_IMAGE
-      value: gcr.io/kaniko-project/executor:v1.7.0
+      value: $(workspaces.source.path)/src/LoyaltySystemAPI/Dockerfile
+    - name: CONTEXT
+      value: $(workspaces.source.path)/src/LoyaltySystemAPI
+   

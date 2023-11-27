@@ -57,5 +57,9 @@ kubectl apply `
     -f ./vehiclemanagementapi$meshPostfix.yaml `
     -f ./workshopmanagementapi$meshPostfix.yaml `
     -f ./webapp$meshPostfix.yaml `
+    -f ./prometheus.yaml `
+    -f ./node-exporter.yaml `
+    -f ./grafana.yaml `
+    -f ./influxdb.yaml `
     -f https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml `
     -f https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml

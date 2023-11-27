@@ -1,4 +1,6 @@
-﻿namespace PitStop.WebApp.Controllers;
+﻿using Pitstop.WebApp.RESTClients;
+
+namespace PitStop.WebApp.Controllers;
 
     public class VehicleManagementController : Controller
 {

@@ -1,5 +1,6 @@
 docker volume create --name=sqlserverdata
 docker volume create --name=rabbitmqdata
+docker volume create --name=grafanadata
 
 # Build the .NET SDK base image that contains the Directory.Packages.props file so it is used when restoring the NuGet packages
 docker build -t ghcr.io/hanaim-devops/pitstop-dotnet-sdk-base:1.0 . -f dotnet-sdk-base-dockerfile

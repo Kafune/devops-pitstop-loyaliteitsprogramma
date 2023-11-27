@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeService", "TimeService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{A0ACF2B6-E083-45E6-A0CA-6E7475B5E7AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyalitySystemAPI", "LoyalitySystemAPI\LoyalitySystemAPI.csproj", "{06FC3D08-BCF0-4BE5-A163-50AD4DF9A99E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltySystemAPI", "LoyaltySystemAPI\LoyaltySystemAPI.csproj", "{06FC3D08-BCF0-4BE5-A163-50AD4DF9A99E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtils", "TestUtils\TestUtils.csproj", "{7DD16742-A87F-44A1-97D7-1105BBE21F36}"
 EndProject

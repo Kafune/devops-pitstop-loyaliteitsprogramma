@@ -13,6 +13,7 @@ fi
 
 docker volume create --name=sqlserverdata
 docker volume create --name=rabbitmqdata
+docker volume create --name=grafanadata
 
 # Build the .NET SDK base image that contains the Directory.Packages.props file so it is used when restoring the NuGet packages
 docker build -t pitstop-dotnet-sdk-base:1.0 . -f dotnet-sdk-base-dockerfile
@@ -25,4 +26,4 @@ docker build -t ghcr.io/hanaim-devops/pitstop-dotnet-aspnet-base:1.0 . -f dotnet
 
 # Rebuild all the services that have changes
 # If you want to (re)build only a specific service, go to the src folder and execute `docker-compose build <servicename-lowercase>`
-docker-compose build $NOCACHE
+docker-compose -f docker-compose.yml build $NOCACHE
