@@ -46,8 +46,6 @@ jobs:
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
-      with:
-        path: ./src/LoyaltySystemAPI/Dockerfile
     
     - run: cat src/VehicleManagementAPI/Dockerfile
     
@@ -57,4 +55,4 @@ jobs:
         context: ./src/LoyaltySystemAPI
         push: true
         tags: hanaim-devops/loyaltysystemapi:1.0
-        path: ./src/LoyaltySystemAPI/Dockerfile
+        file: ./src/LoyaltySystemAPI/Dockerfile
