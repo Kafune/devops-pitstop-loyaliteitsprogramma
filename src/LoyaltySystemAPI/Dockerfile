@@ -21,4 +21,3 @@ HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD curl --silent --fail htt
 
 # Start
 ENTRYPOINT ["dotnet", "LoyaltySystemAPI.dll"]
-
