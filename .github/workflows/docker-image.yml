@@ -54,6 +54,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: ./src
+        context: ./src/LoyaltySystemAPI
         push: true
         tags: hanaim-devops/loyaltysystemapi:1.0
+        path: ./src/LoyaltySystemAPI/Dockerfile
