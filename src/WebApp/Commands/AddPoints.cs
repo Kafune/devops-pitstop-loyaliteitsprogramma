@@ -8,9 +8,7 @@
         public AddPoints(Guid messageId, string customerId, int pointsToAdd) : base(messageId)
         {
             CustomerId = customerId;
-            PointsToAdd = pointsToAdd;    
-            
-
+            PointsToAdd = pointsToAdd;
         }
     }
 }

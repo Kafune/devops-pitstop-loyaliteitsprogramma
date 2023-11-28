@@ -18,6 +18,7 @@ public class LoyaltyProgramController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
+        return null;
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             var model = new LoyaltyManagementViewModel

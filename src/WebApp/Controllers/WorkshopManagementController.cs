@@ -1,14 +1,18 @@
-﻿namespace PitStop.WebApp.Controllers;
+﻿using Pitstop.WebApp.RESTClients;
+
+namespace PitStop.WebApp.Controllers;
 
     public class WorkshopManagementController : Controller
 {
     private IWorkshopManagementAPI _workshopManagementAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
+    private ILoyaltySystemAPI _loyaltySystemAPI;
 
-    public WorkshopManagementController(IWorkshopManagementAPI workshopManagamentAPI, ILogger<WorkshopManagementController> logger)
+    public WorkshopManagementController(IWorkshopManagementAPI workshopManagamentAPI, ILogger<WorkshopManagementController> logger, ILoyaltySystemAPI loyaltySystemAPI)
     {
         _workshopManagementAPI = workshopManagamentAPI;
+        _loyaltySystemAPI = loyaltySystemAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
     }
@@ -87,7 +91,8 @@
                 Id = job.Id,
                 Date = planningDate,
                 ActualStartTime = job.StartTime,
-                ActualEndTime = job.EndTime
+                ActualEndTime = job.EndTime,
+                SelectedVehicleLicenseNumber = job.Vehicle.LicenseNumber
             };
             return View(model);
         }, View("Offline", new WorkshopManagementOfflineViewModel()));
@@ -104,8 +109,8 @@
 
                 try
                 {
-                        // register maintenance job
-                        DateTime startTime = inputModel.Date.Add(inputModel.StartTime.TimeOfDay);
+                    // register maintenance job
+                    DateTime startTime = inputModel.Date.Add(inputModel.StartTime.TimeOfDay);
                     DateTime endTime = inputModel.Date.Add(inputModel.EndTime.TimeOfDay);
                     Vehicle vehicle = await _workshopManagementAPI.GetVehicleByLicenseNumber(inputModel.SelectedVehicleLicenseNumber);
                     Customer customer = await _workshopManagementAPI.GetCustomerById(vehicle.OwnerId);
@@ -152,10 +157,28 @@
                 DateTime actualStartTime = inputModel.Date.Add(inputModel.ActualStartTime.Value.TimeOfDay);
                 DateTime actualEndTime = inputModel.Date.Add(inputModel.ActualEndTime.Value.TimeOfDay);
 
+                int loyaltyPointsEarned = (int)Math.Round((actualEndTime - actualStartTime).TotalMinutes / 30) * 10;
+
+                Vehicle vehicle = await _workshopManagementAPI.GetVehicleByLicenseNumber(inputModel.SelectedVehicleLicenseNumber);
+                Customer customer = await _workshopManagementAPI.GetCustomerById(vehicle.OwnerId);
+
+                inputModel.LoyaltyPoints = loyaltyPointsEarned;
+
                 FinishMaintenanceJob cmd = new FinishMaintenanceJob(Guid.NewGuid(), inputModel.Id,
-                    actualStartTime, actualEndTime, inputModel.Notes);
+                    actualStartTime, actualEndTime, inputModel.Notes, inputModel.LoyaltyPoints);
+
+                AddLoyaltyPoints addLoyaltyCmd = new(Guid.NewGuid(), customer.CustomerId, inputModel.LoyaltyPoints);
+
+                Console.WriteLine("here");
 
                 await _workshopManagementAPI.FinishMaintenanceJob(dateStr, inputModel.Id.ToString("D"), cmd);
+
+                Console.WriteLine("here 2");
+
+                await _loyaltySystemAPI.AddLoyaltyPoints(customer.CustomerId, inputModel.LoyaltyPoints, addLoyaltyCmd);
+
+                Console.WriteLine("here to write to loyaltysystem");
+
 
                 return RedirectToAction("Details", new { planningDate = dateStr, jobId = inputModel.Id });
             }, View("Offline", new WorkshopManagementOfflineViewModel()));

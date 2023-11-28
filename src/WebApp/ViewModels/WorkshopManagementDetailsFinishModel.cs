@@ -16,4 +16,10 @@ public class WorkshopManagementFinishViewModel
 
     [Display(Name = "Mechanic notes")]
     public string Notes { get; set; }
+
+    [Display(Name = "Vehicle")]
+    public string SelectedVehicleLicenseNumber { get; set; }
+
+    [Display(Name = "Loyalty points to customer")]
+    public int LoyaltyPoints { get; set; }
 }
