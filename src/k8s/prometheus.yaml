@@ -17,14 +17,11 @@ data:
         static_configs:
           - targets: ['node:9100']
 
----
+# ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: prometheus
-    version: v1
   name: prometheus
   namespace: pitstop
 spec:
@@ -32,8 +29,6 @@ spec:
   selector:
     matchLabels:
       app: prometheus
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
