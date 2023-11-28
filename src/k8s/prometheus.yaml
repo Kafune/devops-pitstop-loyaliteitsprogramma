@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # apiVersion: v1
 # kind: PersistentVolume
 # metadata:
@@ -46,6 +47,26 @@
 #     scrape_interval: 1m
 #     static_configs:
 #     - targets: ['node:9100']
+=======
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: pitstop
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 1m
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['prometheus:9090']
+
+      - job_name: 'node'
+        static_configs:
+          - targets: ['node:9100']
+>>>>>>> fc582d1a7ec1146d38405a81519fdbd8f0ce530a
 
 # ---
 
@@ -70,17 +91,12 @@ spec:
         ports:
         - containerPort: 9090
         volumeMounts:
-            - name: prometheus-config-volume
-              mountPath: /etc/prometheus/
-            - name: prometheus-volume
-              mountPath: /prometheus
-      volumes:
         - name: prometheus-config-volume
-          configMap:
-            name: prometheus-config
-        - name: prometheus-volume
-          persistentVolumeClaim:
-             claimName: prometheus-pvc
+          mountPath: /etc/prometheus/
+      volumes:
+      - name: prometheus-config-volume
+        configMap:
+          name: prometheus-config
       restartPolicy: Always
 
 ---

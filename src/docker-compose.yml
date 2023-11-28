@@ -162,7 +162,9 @@ services:
       - 9100:9100
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana
+    volumes:
+      - grafanadata:/var/lib/grafana
     expose:
       - 3000
     ports:
@@ -172,4 +174,6 @@ volumes:
   sqlserverdata:
     external: true
   rabbitmqdata:
+    external: true
+  grafanadata:
     external: true
