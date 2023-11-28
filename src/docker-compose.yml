@@ -41,7 +41,7 @@ services:
       - ACCEPT_EULA=Y
 
   vehiclemanagementapi:
-    image: pitstop/vehiclemanagementapi:1.0
+    image: ghcr.io/hanaim-devops/vehiclemanagementapi:1.0
     build: VehicleManagementAPI
     depends_on:
       - rabbitmq
@@ -52,7 +52,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   customermanagementapi:
-    image: pitstop/customermanagementapi:1.0
+    image: ghcr.io/hanaim-devops/customermanagementapi:1.0
     build: CustomerManagementAPI
     depends_on:
       - rabbitmq
@@ -63,7 +63,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   workshopmanagementapi:
-    image: pitstop/workshopmanagementapi:1.0
+    image: ghcr.io/hanaim-devops/workshopmanagementapi:1.0
     build: WorkshopManagementAPI
     depends_on:
       - rabbitmq
@@ -74,8 +74,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
   
   loyaltysystemapi:
-    image: loyaltysystemapi:latest
-    build: LoyaltySystemAPI
+    image: ghcr.io/hanaim-devops/loyaltysystemapi:1.0
+    build: LoyalitySystemAPI
     depends_on:
       - rabbitmq
       - sqlserver
@@ -85,7 +85,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
 
   auditlogservice:
-    image: pitstop/auditlogservice:1.0
+    image: ghcr.io/hanaim-devops/auditlogservice:1.0
     build: AuditlogService
     container_name: auditlogservice
     depends_on:
@@ -94,7 +94,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   invoiceservice:
-    image: pitstop/invoiceservice:1.0
+    image: ghcr.io/hanaim-devops/invoiceservice:1.0
     build: InvoiceService
     container_name: invoiceservice
     depends_on:
@@ -105,7 +105,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   notificationservice:
-    image: pitstop/notificationservice:1.0
+    image: ghcr.io/hanaim-devops/notificationservice:1.0
     build: NotificationService
     container_name: notificationservice
     depends_on:
@@ -116,7 +116,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   timeservice:
-    image: pitstop/timeservice:1.0
+    image: ghcr.io/hanaim-devops/timeservice:1.0
     build: TimeService
     container_name: timeservice
     depends_on:
@@ -125,7 +125,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   workshopmanagementeventhandler:
-    image: pitstop/workshopmanagementeventhandler:1.0
+    image: ghcr.io/hanaim-devops/workshopmanagementeventhandler:1.0
     build: WorkshopManagementEventHandler
     container_name: workshopmanagementeventhandler
     depends_on:
@@ -135,7 +135,7 @@ services:
       - DOTNET_ENVIRONMENT=Production
 
   webapp:
-    image: pitstop/webapp:1.0
+    image: ghcr.io/hanaim-devops/webapp:1.0
     build: WebApp
     container_name: webapp
     depends_on:

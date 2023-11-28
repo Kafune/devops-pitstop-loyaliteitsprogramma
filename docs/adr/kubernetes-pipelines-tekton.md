@@ -12,14 +12,14 @@ Bij een CI/CD zoals Gitlab of Github Actions zit de pipeline standaard in de git
 
 Het configureren van Git en Docker credentials heeft veel tijd gekost, waarvan de Docker credentials waarschijnlijk gelukt is. De foutmelding geeft dit niet helemaal helder terug.
 
-Hierdoor is het niet mogelijk om een image te bouwen en  Doordat we niet veel meer tijd hebben, is het verder niet waard om uit te zoeken waarom het niet werkt.
+Doordat het veel tijd kostte, is het niet mogelijk om een image te bouwen via Tekton. Het was de tijd niet meer waard om verder uit te zoeken waarom Tekton niet meer werkt.
 
-**Update: mogelijke oplossing gevonden door gebruik te maken van Github registry om alle containers van pitstop daarin te zetten, zodat de pipeline daar toegang op heeft.**
+In plaats daarvan, maken we nu gebruik van Github Actions om de image van het loyaliteitssysteem te pushen naar de Github Registry. Dit is uiteindelijk [wel gelukt](https://github.com/hanaim-devops/pitstop-groep-d/actions/runs/7005164272).
 
 ## Decision
 
-Schrappen van Tekton CI/CD voor het pitstop project wegens beperkte tijd. Het deployment via pipelines vervangen door Github Actions
+Schrappen van Tekton CI/CD voor het pitstop project wegens beperkte tijd. Het deployment via pipelines vervangen door Github Actions.
 
 ## Consequences
 
-Waarschijnlijk moeten we na elke verandering binnen het loyaliteitsysteem de Docker image elke keer pushen naar de Docker registry, tenzij er met lokale images wordt gewerkt. Al een poging gedaan om een pipeline op te zetten met Github Actions, maar zelfde probleem gevonden dat de pitstop image niet gepulled kan worden van de registry. Nog kijken of het pullen met Tekton mogelijk is door gebruik van Github registry.
+Na elke PR naar de main, bouwt en pusht de Github actions pipeline een nieuwe image van het loyaliteitssysteem naar de Github Registry. Hierdoor blijft de image binnen de Github registry constant up-to-date, waardoor Kubernetes deze image weer kan ophalen. Het nadeel is dat de base-images ook op de Github registry moeten staan wegens rechten om de afhaneklijke images te pullen. Hierdoor moet elke developer die met Docker & Kubernetes werkt, zich authenticeren voor [de Github Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-with-a-personal-access-token-classic).
