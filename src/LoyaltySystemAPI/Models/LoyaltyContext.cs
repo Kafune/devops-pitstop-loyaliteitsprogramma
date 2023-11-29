@@ -13,6 +13,13 @@ namespace LoyaltySystemAPI.Models
 
         }
 
+            public LoyaltyContext() : base()
+    {
+        // Optioneel: Voeg hier logica toe voor de parameterloze constructor
+    }
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Loyalty>()
