@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: pitstop
+spec:
+  rules:
+  - host: prometheus.cg-4.k8s.devops.aimsites.nl
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: prometheus
+            port: 
+              number: 9090
+  - host: grafana.cg-4.k8s.devops.aimsites.nl
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: grafana
+            port: 
+              number: 3000
+  - host: webapp.cg-4.k8s.devops.aimsites.nl
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: webapp
+            port: 
+              number: 7005

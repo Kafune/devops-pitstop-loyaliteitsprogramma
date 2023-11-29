@@ -31,7 +31,7 @@ metadata:
 spec:
   selector:
     app: influxdb
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8086

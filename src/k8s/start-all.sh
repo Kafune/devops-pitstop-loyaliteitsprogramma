@@ -36,23 +36,24 @@ then
 fi
 
 kubectl apply \
-    -f ./pv.yaml \
-    -f ./pitstop-namespace$MESHPOSTFIX.yaml \
-    -f ./rabbitmq.yaml \
-    -f ./logserver.yaml \
-    -f ./sqlserver.yaml \
-    -f ./mailserver.yaml \
-    -f ./invoiceservice.yaml \
-    -f ./timeservice.yaml \
-    -f ./notificationservice.yaml \
-    -f ./workshopmanagementeventhandler.yaml \
-    -f ./auditlogservice.yaml \
-    -f ./customermanagementapi-v1$MESHPOSTFIX.yaml \
-    -f ./customermanagementapi-svc.yaml \
-    -f ./vehiclemanagementapi$MESHPOSTFIX.yaml \
-    -f ./workshopmanagementapi$MESHPOSTFIX.yaml \
-    -f ./webapp$MESHPOSTFIX.yaml \
-    -f ./prometheus.yaml \
-    -f ./node-exporter.yaml \
-    -f ./grafana.yaml \
-    -f ./influxdb.yaml
+    -f ./ingress.yaml --kubeconfig=cg-4.yaml \
+    -f ./pv.yaml --kubeconfig=cg-4.yaml \
+    -f ./pitstop-namespace$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./rabbitmq.yaml --kubeconfig=cg-4.yaml \
+    -f ./logserver.yaml --kubeconfig=cg-4.yaml \
+    -f ./sqlserver.yaml --kubeconfig=cg-4.yaml \
+    -f ./mailserver.yaml --kubeconfig=cg-4.yaml \
+    -f ./invoiceservice.yaml --kubeconfig=cg-4.yaml \
+    -f ./timeservice.yaml --kubeconfig=cg-4.yaml \
+    -f ./notificationservice.yaml --kubeconfig=cg-4.yaml \
+    -f ./workshopmanagementeventhandler.yaml --kubeconfig=cg-4.yaml \
+    -f ./auditlogservice.yaml --kubeconfig=cg-4.yaml \
+    -f ./customermanagementapi-v1$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./customermanagementapi-svc.yaml --kubeconfig=cg-4.yaml \
+    -f ./vehiclemanagementapi$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./workshopmanagementapi$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./webapp$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./prometheus.yaml --kubeconfig=cg-4.yaml \
+    -f ./node-exporter.yaml --kubeconfig=cg-4.yaml \
+    -f ./grafana.yaml --kubeconfig=cg-4.yaml \
+    -f ./influxdb.yaml --kubeconfig=cg-4.yaml

@@ -38,7 +38,7 @@ metadata:
   name: prometheusnodeexporter
   namespace: pitstop
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - port: 9100
       targetPort: 9100
