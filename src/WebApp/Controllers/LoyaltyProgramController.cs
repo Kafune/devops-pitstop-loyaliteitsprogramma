@@ -18,12 +18,11 @@ public class LoyaltyProgramController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        return null;
         return await _resiliencyHelper.ExecuteResilient(async () =>
         {
             var model = new LoyaltyManagementViewModel
             {
-                Loyalty = await _loyaltySystemAPI.GetLoyalties()
+                Loyalties = await _loyaltySystemAPI.GetLoyalties()
             };
             return View(model);
         }, View("Offline", new LoyaltyManagementOfflineViewModel()));

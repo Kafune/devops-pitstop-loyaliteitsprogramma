@@ -10,7 +10,6 @@
         
 
         [Post("/loyalty/addpoints")]
-        
-        Task AddLoyaltyPoints([Query("customerid")] string customerId, [Query("pointstoadd")] int loyaltyPoints, AddLoyaltyPoints command);
+        Task AddLoyaltyPoints([Body] AddLoyaltyPointsRequest addLoyaltyPointsRequest, AddLoyaltyPoints command);
     }
 }
