@@ -5,16 +5,16 @@ namespace PitStop.WebApp.Controllers;
     public class WorkshopManagementController : Controller
 {
     private IWorkshopManagementAPI _workshopManagementAPI;
+    private ILoyaltySystemAPI _loyaltySystemAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
-    private ILoyaltySystemAPI _loyaltySystemAPI;
 
     public WorkshopManagementController(IWorkshopManagementAPI workshopManagamentAPI, ILogger<WorkshopManagementController> logger, ILoyaltySystemAPI loyaltySystemAPI)
     {
         _workshopManagementAPI = workshopManagamentAPI;
-        _loyaltySystemAPI = loyaltySystemAPI;
         _logger = logger;
         _resiliencyHelper = new ResiliencyHelper(_logger);
+        _loyaltySystemAPI = loyaltySystemAPI;
     }
 
     [HttpGet]
@@ -86,15 +86,28 @@ namespace PitStop.WebApp.Controllers;
         {
             string dateStr = planningDate.ToString("yyyy-MM-dd");
             MaintenanceJob job = await _workshopManagementAPI.GetMaintenanceJob(dateStr, jobId);
+
+            int loyaltyPointsEarned = (int)Math.Floor((job.EndTime - job.StartTime).TotalMinutes / 30) * 25;
+
             var model = new WorkshopManagementFinishViewModel
             {
                 Id = job.Id,
                 Date = planningDate,
                 ActualStartTime = job.StartTime,
                 ActualEndTime = job.EndTime,
-                SelectedVehicleLicenseNumber = job.Vehicle.LicenseNumber
             };
-            return View(model);
+            var loyaltyModel = new LoyaltyManagementViewModel
+            {
+                CustomerId = job.Customer.CustomerId,
+                SelectedVehicleLicenseNumber = job.Vehicle.LicenseNumber,
+                LoyaltyPoints = loyaltyPointsEarned
+            };
+            var loyaltyWorkshopVM= new LoyaltyWorkshopViewmodel
+            {
+                WorkshopManagementFinishViewModel = model,
+                LoyaltyManagementViewModel = loyaltyModel
+            };
+            return View(loyaltyWorkshopVM);
         }, View("Offline", new WorkshopManagementOfflineViewModel()));
     }
 
@@ -147,45 +160,42 @@ namespace PitStop.WebApp.Controllers;
     }
 
     [HttpPost]
-    public async Task<IActionResult> FinishMaintenanceJob([FromForm] WorkshopManagementFinishViewModel inputModel)
+    public async Task<IActionResult> FinishMaintenanceJob([FromForm] LoyaltyWorkshopViewmodel inputModel)
     {
         if (ModelState.IsValid)
         {
+            WorkshopManagementFinishViewModel workshopVM = inputModel.WorkshopManagementFinishViewModel;
+            LoyaltyManagementViewModel loyaltyVM = inputModel.LoyaltyManagementViewModel;
             return await _resiliencyHelper.ExecuteResilient(async () =>
             {
-                string dateStr = inputModel.Date.ToString("yyyy-MM-dd");
-                DateTime actualStartTime = inputModel.Date.Add(inputModel.ActualStartTime.Value.TimeOfDay);
-                DateTime actualEndTime = inputModel.Date.Add(inputModel.ActualEndTime.Value.TimeOfDay);
+                string dateStr = workshopVM.Date.ToString("yyyy-MM-dd");
+                DateTime actualStartTime = workshopVM.Date.Add(workshopVM.ActualStartTime.Value.TimeOfDay);
+                DateTime actualEndTime = workshopVM.Date.Add(workshopVM.ActualEndTime.Value.TimeOfDay);
 
-                int loyaltyPointsEarned = (int)Math.Round((actualEndTime - actualStartTime).TotalMinutes / 30) * 10;
+                // calculate loyalty points based on actual duration of maintenance job. give 25 loyalty points for every 30 minutes of maintenance.
+                int loyaltyPointsEarned = (int)Math.Floor((actualEndTime - actualStartTime).TotalMinutes / 30) * 25;
 
-                Vehicle vehicle = await _workshopManagementAPI.GetVehicleByLicenseNumber(inputModel.SelectedVehicleLicenseNumber);
-                Customer customer = await _workshopManagementAPI.GetCustomerById(vehicle.OwnerId);
+                loyaltyVM.LoyaltyPoints = loyaltyPointsEarned;
 
-                inputModel.LoyaltyPoints = loyaltyPointsEarned;
+                FinishMaintenanceJob cmd = new FinishMaintenanceJob(Guid.NewGuid(), workshopVM.Id,
+                    actualStartTime, actualEndTime, workshopVM.Notes, loyaltyVM.LoyaltyPoints);
 
-                FinishMaintenanceJob cmd = new FinishMaintenanceJob(Guid.NewGuid(), inputModel.Id,
-                    actualStartTime, actualEndTime, inputModel.Notes, inputModel.LoyaltyPoints);
+                AddLoyaltyPoints addLoyaltyCmd = new(Guid.NewGuid(), loyaltyVM.CustomerId, loyaltyVM.LoyaltyPoints);
+                AddLoyaltyPointsRequest addLoyaltyPointsRequest = new() { 
+                    CustomerId = "104e0c01146a430b90b7e88940c37cab",
+                    LoyaltyPoints = loyaltyVM.LoyaltyPoints
+                };
 
-                AddLoyaltyPoints addLoyaltyCmd = new(Guid.NewGuid(), customer.CustomerId, inputModel.LoyaltyPoints);
+                await _workshopManagementAPI.FinishMaintenanceJob(dateStr, workshopVM.Id.ToString("D"), cmd);
 
-                Console.WriteLine("here");
+                await _loyaltySystemAPI.AddLoyaltyPoints(addLoyaltyPointsRequest, addLoyaltyCmd);
 
-                await _workshopManagementAPI.FinishMaintenanceJob(dateStr, inputModel.Id.ToString("D"), cmd);
-
-                Console.WriteLine("here 2");
-
-                await _loyaltySystemAPI.AddLoyaltyPoints(customer.CustomerId, inputModel.LoyaltyPoints, addLoyaltyCmd);
-
-                Console.WriteLine("here to write to loyaltysystem");
-
-
-                return RedirectToAction("Details", new { planningDate = dateStr, jobId = inputModel.Id });
+                return RedirectToAction("Details", new { planningDate = dateStr, jobId = workshopVM.Id });
             }, View("Offline", new WorkshopManagementOfflineViewModel()));
         }
         else
         {
-            return View("Finish", inputModel);
+            return View("Finish", inputModel.WorkshopManagementFinishViewModel);
         }
     }
 

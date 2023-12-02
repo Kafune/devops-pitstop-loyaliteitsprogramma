@@ -1,4 +1,6 @@
-﻿namespace Pitstop.WebApp.RESTClients
+﻿using System.Net.Http;
+
+namespace Pitstop.WebApp.RESTClients
 {
     public class LoyaltySystemAPI : ILoyaltySystemAPI
     {
@@ -6,7 +8,7 @@
 
         public LoyaltySystemAPI(IConfiguration config, HttpClient httpClient)
         {
-            string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("WorkshopManagementAPI");
+            string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("LoyaltySystemAPI");
             httpClient.BaseAddress = new Uri($"http://{apiHostAndPort}/api");
             _restClient = RestService.For<ILoyaltySystemAPI>(
                 httpClient,
@@ -19,9 +21,9 @@
         {
             return await _restClient.GetLoyalties();
         }
-        public async Task AddLoyaltyPoints(string customerId, int loyaltyPoints, AddLoyaltyPoints command)
+        public async Task AddLoyaltyPoints([Body] AddLoyaltyPointsRequest addLoyaltyPointsRequest, AddLoyaltyPoints command)
         {
-            await _restClient.AddLoyaltyPoints(customerId, loyaltyPoints, command);
+            await _restClient.AddLoyaltyPoints(addLoyaltyPointsRequest, command);
         }
 
         public Task<Loyalty> GetLoyaltyStatusFromCustomer([AliasAs("id")] string customerId)
