@@ -30,5 +30,10 @@ namespace Pitstop.WebApp.RESTClients
         {
             throw new NotImplementedException();
         }
+
+        public async Task RegisterCustomerToLoyaltySystem([Body] AddCustomerToLoyaltyRequest addCustomerToLoyaltyRequest, AddCustomerToLoyalty addCustomerToLoyalty)
+        {
+            await _restClient.RegisterCustomerToLoyaltySystem(addCustomerToLoyaltyRequest, addCustomerToLoyalty);
+        }
     }
 }

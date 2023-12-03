@@ -60,7 +60,7 @@ namespace LoyaltySystemAPI.Controllers
             return Ok($"Nieuw aantal punten voor klant {addLoyaltyPointsRequest.LoyaltyPoints}: {currentPoints}");
         }
 
-        private string DetermineCustomercategory(int points)
+        private static string DetermineCustomercategory(int points)
         {
             if (points >= 1001)
             {
@@ -69,11 +69,9 @@ namespace LoyaltySystemAPI.Controllers
             else if (points >= 501)
             {
                 return "Goud";
-            }
-            else
-            {
-                return "Zilver";
-            }
+            }    
+            return "Zilver";
+            
         }
 
         // POST api/<LoyaltyController>/AddCustomer

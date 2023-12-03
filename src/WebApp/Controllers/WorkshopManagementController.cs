@@ -5,7 +5,7 @@ namespace PitStop.WebApp.Controllers;
     public class WorkshopManagementController : Controller
 {
     private IWorkshopManagementAPI _workshopManagementAPI;
-    private ILoyaltySystemAPI _loyaltySystemAPI;
+    private readonly ILoyaltySystemAPI _loyaltySystemAPI;
     private readonly Microsoft.Extensions.Logging.ILogger _logger;
     private ResiliencyHelper _resiliencyHelper;
 
@@ -182,9 +182,11 @@ namespace PitStop.WebApp.Controllers;
 
                 AddLoyaltyPoints addLoyaltyCmd = new(Guid.NewGuid(), loyaltyVM.CustomerId, loyaltyVM.LoyaltyPoints);
                 AddLoyaltyPointsRequest addLoyaltyPointsRequest = new() { 
-                    CustomerId = "104e0c01146a430b90b7e88940c37cab",
+                    CustomerId = loyaltyVM.CustomerId,
                     LoyaltyPoints = loyaltyVM.LoyaltyPoints
                 };
+
+                Console.WriteLine(loyaltyVM.CustomerId);
 
                 await _workshopManagementAPI.FinishMaintenanceJob(dateStr, workshopVM.Id.ToString("D"), cmd);
 
