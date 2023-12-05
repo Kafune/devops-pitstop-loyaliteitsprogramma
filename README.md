@@ -43,6 +43,12 @@ Niveaus en Beloningen:
 - Nigel: Prometheus en Slack integratie
 - Tom: InfluxDB
 
+## Ophalen van Docker images
+
+Alle Docker images staan nu op de Github Container Registry, voornamelijk zodat de pipeline de rechten heeft om de base images van Asp.net van Pitstop te pullen.
+
+Om als developer zelf de images te builden via Docker compose, is het nodig om een [Github Personal Access Token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-with-a-personal-access-token-classic) aan te maken met een account dat met het HANAIM-DevOps groep is gekoppeld, en vervolgens hiermee in te loggen.
+
 ## C4 diagrams
 
 ### System context diagram
