@@ -36,7 +36,7 @@ public class LoyaltyControllerTests
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var items = Assert.IsType<List<Loyalty>>(okResult.Value);
-            Assert.Equal(3, items.Count);
+            Assert.Equal(4, items.Count);
         }
     }
 
@@ -58,5 +58,54 @@ public class LoyaltyControllerTests
         var okResult = Assert.IsType<OkObjectResult>(result);
         var loyalty = Assert.IsType<Loyalty>(okResult.Value);
         Assert.Equal(customerId, loyalty.CustomerID);
+    }
+     [Fact]
+    public async Task AddPoints_ReturnsOkResult()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<LoyaltyContext>()
+            .UseInMemoryDatabase(databaseName: "TestDatabase")
+            .Options;
+
+        using (var mockContext = new LoyaltyContext(options, "your_db_path"))
+        {
+            mockContext.Loyalties.Add(new Loyalty { CustomerID = "5", Points = "100", Category = "Zilver" });
+            mockContext.SaveChanges();
+
+            var controller = new LoyaltyController(mockContext);
+            var customerId = "5";
+            var pointsToAdd = 50;
+
+            // Act
+            var result = await controller.AddPoints(customerId, pointsToAdd);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var message = Assert.IsType<string>(okResult.Value);
+            Assert.Contains(customerId, message);
+        }
+    }
+
+    [Fact]
+    public async Task AddCustomer_ReturnsOkResult()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<LoyaltyContext>()
+            .UseInMemoryDatabase(databaseName: "TestDatabase")
+            .Options;
+
+        using (var mockContext = new LoyaltyContext(options, "your_db_path"))
+        {
+            var controller = new LoyaltyController(mockContext);
+            var customerDto = new CustomerDto { CustomerID = "4" };
+
+            // Act
+            var result = await controller.AddCustomer(customerDto);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var message = Assert.IsType<string>(okResult.Value);
+            Assert.Contains(customerDto.CustomerID, message);
+        }
     }
 }
