@@ -4,7 +4,7 @@ namespace Pitstop.WebApp.RESTClients
 {
     public class LoyaltySystemAPI : ILoyaltySystemAPI
     {
-        private ILoyaltySystemAPI _restClient;
+        private readonly ILoyaltySystemAPI _restClient;
 
         public LoyaltySystemAPI(IConfiguration config, HttpClient httpClient)
         {
@@ -21,9 +21,9 @@ namespace Pitstop.WebApp.RESTClients
         {
             return await _restClient.GetLoyalties();
         }
-        public async Task AddLoyaltyPoints([Body] AddLoyaltyPointsRequest addLoyaltyPointsRequest, AddLoyaltyPoints command)
+        public async Task AddLoyaltyPoints([Body] AddLoyaltyPointsRequest addLoyaltyPointsRequest, AddLoyaltyPoints addLoyaltyPoints)
         {
-            await _restClient.AddLoyaltyPoints(addLoyaltyPointsRequest, command);
+            await _restClient.AddLoyaltyPoints(addLoyaltyPointsRequest, addLoyaltyPoints);
         }
 
         public Task<Loyalty> GetLoyaltyStatusFromCustomer([AliasAs("id")] string customerId)

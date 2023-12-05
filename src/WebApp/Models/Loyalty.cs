@@ -10,5 +10,4 @@ public class Loyalty
     public string Points { get; set; }
     [Display(Name = "Category")]
     public string Category { get; set; }
-
 }

@@ -13,14 +13,12 @@ namespace LoyaltySystemAPI.Controllers
         public LoyaltyController(LoyaltyContext dbContext)
         {
             _dbContext = dbContext;
-            Console.WriteLine(_dbContext);
         }
 
         // GET: api/<LoyaltyController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            Console.WriteLine(_dbContext);
             return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
@@ -86,7 +84,6 @@ namespace LoyaltySystemAPI.Controllers
             var loyalty = new Loyalty
             {
                 CustomerID = customerDto.CustomerID,
-             
                 Points = "0",
                 Category = "Zilver"
             };

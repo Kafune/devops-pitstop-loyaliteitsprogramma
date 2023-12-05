@@ -172,23 +172,24 @@ namespace PitStop.WebApp.Controllers;
                 DateTime actualStartTime = workshopVM.Date.Add(workshopVM.ActualStartTime.Value.TimeOfDay);
                 DateTime actualEndTime = workshopVM.Date.Add(workshopVM.ActualEndTime.Value.TimeOfDay);
 
-                // calculate loyalty points based on actual duration of maintenance job. give 25 loyalty points for every 30 minutes of maintenance.
                 int loyaltyPointsEarned = (int)Math.Floor((actualEndTime - actualStartTime).TotalMinutes / 30) * 25;
 
+                Vehicle selectedVehicle = await _workshopManagementAPI.GetVehicleByLicenseNumber(loyaltyVM.SelectedVehicleLicenseNumber);
+
+                loyaltyVM.CustomerId = selectedVehicle.OwnerId;
                 loyaltyVM.LoyaltyPoints = loyaltyPointsEarned;
 
                 FinishMaintenanceJob cmd = new FinishMaintenanceJob(Guid.NewGuid(), workshopVM.Id,
                     actualStartTime, actualEndTime, workshopVM.Notes, loyaltyVM.LoyaltyPoints);
 
+                await _workshopManagementAPI.FinishMaintenanceJob(dateStr, workshopVM.Id.ToString("D"), cmd);
+
                 AddLoyaltyPoints addLoyaltyCmd = new(Guid.NewGuid(), loyaltyVM.CustomerId, loyaltyVM.LoyaltyPoints);
-                AddLoyaltyPointsRequest addLoyaltyPointsRequest = new() { 
+                AddLoyaltyPointsRequest addLoyaltyPointsRequest = new()
+                {
                     CustomerId = loyaltyVM.CustomerId,
                     LoyaltyPoints = loyaltyVM.LoyaltyPoints
                 };
-
-                Console.WriteLine(loyaltyVM.CustomerId);
-
-                await _workshopManagementAPI.FinishMaintenanceJob(dateStr, workshopVM.Id.ToString("D"), cmd);
 
                 await _loyaltySystemAPI.AddLoyaltyPoints(addLoyaltyPointsRequest, addLoyaltyCmd);
 
