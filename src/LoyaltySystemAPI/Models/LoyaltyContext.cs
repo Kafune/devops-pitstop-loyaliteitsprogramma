@@ -6,16 +6,17 @@ namespace LoyaltySystemAPI.Models
     public class LoyaltyContext : DbContext
     {
         public DbSet<Loyalty> Loyalties{ get; set; }
-        public string DbPath { get; }
+      public string DbPath { get; }
 
-        public LoyaltyContext(DbContextOptions<LoyaltyContext> options) : base(options)
-        {
+public LoyaltyContext(DbContextOptions<LoyaltyContext> options, string dbPath) : base(options)
+{
+    DbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
+}
 
-        }
 
-            public LoyaltyContext() : base()
+        public LoyaltyContext() : base()
     {
-        // Optioneel: Voeg hier logica toe voor de parameterloze constructor
+       
     }
 
 
