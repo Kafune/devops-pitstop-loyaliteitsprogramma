@@ -75,7 +75,7 @@ services:
   
   loyaltysystemapi:
     image: ghcr.io/hanaim-devops/loyaltysystemapi:1.0
-    build: LoyalitySystemAPI
+    build: LoyaltySystemAPI
     depends_on:
       - rabbitmq
       - sqlserver
