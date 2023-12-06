@@ -93,3 +93,11 @@ C4Container
     Rel_Back(spa, sign, "Uses", "JSON/HTTPS")
     Rel(sign, db, "queries")
 ```
+
+## Toevoegen dashboards
+
+### InfluxDB dashboard
+
+1. Ga naar settings
+2. Onder templates voeg de volgende template toe: [InfluxDB OSS Monitoring](https://raw.githubusercontent.com/influxdata/community-templates/master/influxdb2_oss_metrics/influxdb2_oss_metrics.yml)
+3. Onder dashboards zal nu 'InfluxDB 2.0 OSS Metrics' staan
