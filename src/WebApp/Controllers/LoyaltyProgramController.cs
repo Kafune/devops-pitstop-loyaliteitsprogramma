@@ -22,7 +22,7 @@ public class LoyaltyProgramController : Controller
         {
             var model = new LoyaltyManagementViewModel
             {
-                Loyalty = await _loyaltySystemAPI.GetLoyalties()
+                Loyalties = await _loyaltySystemAPI.GetLoyalties()
             };
             return View(model);
         }, View("Offline", new LoyaltyManagementOfflineViewModel()));

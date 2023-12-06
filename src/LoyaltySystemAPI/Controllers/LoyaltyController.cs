@@ -1,5 +1,7 @@
 ﻿// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+using Pitstop.WebApp.Models;
+
 namespace LoyaltySystemAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -11,14 +13,12 @@ namespace LoyaltySystemAPI.Controllers
         public LoyaltyController(LoyaltyContext dbContext)
         {
             _dbContext = dbContext;
-            Console.WriteLine(_dbContext);
         }
 
         // GET: api/<LoyaltyController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            Console.WriteLine(_dbContext);
             return Ok(await _dbContext.Loyalties.ToListAsync());
         }
 
@@ -36,29 +36,29 @@ namespace LoyaltySystemAPI.Controllers
 
         // POST api/<LoyaltyController>/AddPoints
         [HttpPost("AddPoints")]
-        public async Task<IActionResult> AddPoints([FromQuery] string customerId, [FromQuery] int pointsToAdd)
+        public async Task<IActionResult> AddPoints([FromBody] AddLoyaltyPointsRequest addLoyaltyPointsRequest)
         {
-            var loyalty = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == customerId);
+            var customer = await _dbContext.Loyalties.FirstOrDefaultAsync(c => c.CustomerID == addLoyaltyPointsRequest.CustomerId);
 
-            if (loyalty == null)
+            if (customer == null)
             {
-                return NotFound($"Geen klant gevonden met ID: {customerId}");
+                return NotFound($"Geen klant gevonden met ID: {addLoyaltyPointsRequest.CustomerId}");
             }
 
-            int currentPoints = int.Parse(loyalty.Points);
-            currentPoints += pointsToAdd;
-            loyalty.Points = currentPoints.ToString();
+            int currentPoints = int.Parse(customer.Points);
+            currentPoints += addLoyaltyPointsRequest.LoyaltyPoints;
+            customer.Points = currentPoints.ToString();
 
             string customercategory = DetermineCustomercategory(currentPoints);
-            loyalty.Category = customercategory;
+            customer.Category = customercategory;
 
-            _dbContext.Update(loyalty);
+            _dbContext.Update(customer);
             await _dbContext.SaveChangesAsync();
 
-            return Ok($"Nieuw aantal punten voor klant {customerId}: {currentPoints}");
+            return Ok($"Nieuw aantal punten voor klant {addLoyaltyPointsRequest.LoyaltyPoints}: {currentPoints}");
         }
 
-        private string DetermineCustomercategory(int points)
+        private static string DetermineCustomercategory(int points)
         {
             if (points >= 1001)
             {
@@ -67,11 +67,9 @@ namespace LoyaltySystemAPI.Controllers
             else if (points >= 501)
             {
                 return "Goud";
-            }
-            else
-            {
-                return "Zilver";
-            }
+            }    
+            return "Zilver";
+            
         }
 
         // POST api/<LoyaltyController>/AddCustomer
@@ -86,7 +84,6 @@ namespace LoyaltySystemAPI.Controllers
             var loyalty = new Loyalty
             {
                 CustomerID = customerDto.CustomerID,
-             
                 Points = "0",
                 Category = "Zilver"
             };
