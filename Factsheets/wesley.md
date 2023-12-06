@@ -54,10 +54,8 @@ Tips:
 
 ## 9. Conclusie & feedback
 
-Competenties: *DevOps-7 - Attitude*
-
-Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algemener hoe je terugkijkt op het project. Geef wat constructieve feedback, tips aan docenten/beoordelaars e.d. En beschrijf wat je aan devops kennis, vaardigheden of andere zaken meeneemt naar je afstudeeropdracht of verdere loopbaan. 
-
 Door dit project heb ik ervaring gedaan met dotnet, C# en K8S. Ik denk dat ik door deze basis hier wel voordeel uit ga halen mocht ik hier later nog mee moeten gaan werken. Echter was ik persoonlijk wel te lang bezig met het uitwerken van mijn onderzoek in dit project waardoor ik de eerste keer te weinig tijd had om ergens anders aan te werken.
 
 Het uitbreiden van een bestaande applicatie die niet bepaald eenvoudig in elkaar zit was wel lastig. In het begin ben ik (en mijn team) veel tijd kwijt geweest aan het snappen hoe de PitStop applicatie in elkaar zit. Dit is eigenlijk verloren tijd voor het daadwerkelijk implementeren van onze eigen feature. Een idee is om tijdens de lessen al meer te werken met deze applicatie waardoor aan het begin van de opdracht het al helder is hoe deze in elkaar zit.
+
+Uiteindelijk ben ik wel tevreden met het resultaat van het project en vind ik dat wij als team een prima product hebben opgezet.
