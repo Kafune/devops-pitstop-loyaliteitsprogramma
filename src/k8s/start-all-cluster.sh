@@ -57,3 +57,5 @@ kubectl apply \
     -f ./node-exporter.yaml --kubeconfig=cg-4.yaml \
     -f ./grafana.yaml --kubeconfig=cg-4.yaml \
     -f ./influxdb.yaml --kubeconfig=cg-4.yaml
+
+$SHELL
