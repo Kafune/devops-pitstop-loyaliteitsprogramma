@@ -36,8 +36,6 @@ then
 fi
 
 kubectl apply \
-    -f ./ingress.yaml \
-    -f ./pv.yaml \
     -f ./pitstop-namespace$MESHPOSTFIX.yaml \
     -f ./rabbitmq.yaml \
     -f ./logserver.yaml \
