@@ -1,27 +1,27 @@
-﻿@model Pitstop.WebApp.ViewModels.LoyaltyManagementViewModel
+﻿@model Pitstop.WebApp.ViewModels.LoyaltyCustomerViewModel
 @{
     ViewData["Title"] = "LoyaltyProgram Page";
+    Model.LoyaltyManagementViewModel.Loyalties = Model.LoyaltyManagementViewModel.Loyalties.OrderByDescending(l => l.Points).ToList();
 }
 
 <div>
     <img src="~/images/banner.jpg" />
-    <h3 id="PageTitle">Pitstop - Garage Management System</h3>
+    <h3 id="PageTitle">Loyalty System - overview</h3>
     <table class="table">
         <thead>
             <tr>
-                <th>CustomerId</th>
+                <th>Customer Name</th>
                 <th>Points</th>
                 <th>Category</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var loyalty in Model.Loyalty)
+            @foreach (var loyalty in Model.LoyaltyManagementViewModel.Loyalties)
         {
-            <tr class="clickable" onclick="location.href = '@(Url.Action("Details", "LoyaltyManagement", new { id = loyalty.CustomerId }))'">
-                <td>@loyalty.CustomerId</td>
+             <tr>
+                <td>@Model.CustomerManagementViewModel.Customers.FirstOrDefault(customer => customer.CustomerId == loyalty.CustomerId).Name</td>
                 <td>@loyalty.Points</td>
                 <td>@loyalty.Category</td>
-
             </tr>
         }
         </tbody>

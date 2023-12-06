@@ -43,6 +43,12 @@ Niveaus en Beloningen:
 - Nigel: Prometheus en Slack integratie
 - Tom: InfluxDB
 
+## Ophalen van Docker images
+
+Alle Docker images staan nu op de Github Container Registry, voornamelijk zodat de pipeline de rechten heeft om de base images van Asp.net van Pitstop te pullen.
+
+Om als developer zelf de images te builden via Docker compose, is het nodig om een [Github Personal Access Token](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-with-a-personal-access-token-classic) aan te maken met een account dat met het HANAIM-DevOps groep is gekoppeld, en vervolgens hiermee in te loggen.
+
 ## C4 diagrams
 
 ### System context diagram
@@ -87,3 +93,19 @@ C4Container
     Rel_Back(spa, sign, "Uses", "JSON/HTTPS")
     Rel(sign, db, "queries")
 ```
+
+## Toevoegen dashboards
+
+### InfluxDB dashboard
+
+1. Ga naar settings
+2. Voeg het template dat in './src/influxDB' toe
+3. Onder dashboards zal nu 'InfluxDB OSS Metrics' staan
+4. Voeg een scraper toe:
+  4.1. Aan de linker kant in de navigatie balk, Selecteer Load Data > Scrapers.
+  4.2. Klik Create Scraper.
+  4.3. Voeg een naar toe van de scraper
+  4.4. Selecteer de OSS Metrics bucket om de data op te slaan.
+  4.5. De target URL: http://localhost:8086/metrics.
+  4.6. Klik Create.
+5. Als alles goed is zal het dashboard nu moeten werekn

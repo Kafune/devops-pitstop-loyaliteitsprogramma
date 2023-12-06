@@ -20,11 +20,19 @@ SAMENVATTING BIJDRAGE SCHRIJVEN
 
 ## 1. Code/platform bijdrage
 
-Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https://github.com/hanaim-devops/pitstop-groep-d/issues/6) gewerkt, voornamelijk het opzetten hiervan zodat mijn teamleden hiermee verder konden. Hierbij heb ik een aparte .Net Core API aangemaakt. Hierbij heb ik [het eerste model en controller](https://github.com/hanaim-devops/pitstop-groep-d/commit/7f89efec6c880baf0b422d4da6d7d486fc5d986f) aangemaakt voor het loyaliteitssysteem. De controller had alleen een GET request om te testen of de API daadwerkelijk werkte. Ook heb ik de [integratie met EFCore](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9) werkend gekregen zodat het makkelijk is om een databasetabel aan te maken d.m.v. het ORM systeem. Het werkend krijgen van de EFCore verbinding met de database in Docker kostte het meeste tijd. Nadat dit was gelukt, kon ik het API overdragen naar mijn teamgenoten overdragen zodat zij de endpoints konden maken.
+Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https://github.com/hanaim-devops/pitstop-groep-d/issues/6) gewerkt, voornamelijk het opzetten hiervan zodat mijn teamleden hiermee verder konden. Hierbij heb ik een aparte .Net Core API aangemaakt. Hierbij heb ik [het eerste model en controller](https://github.com/hanaim-devops/pitstop-groep-d/commit/7f89efec6c880baf0b422d4da6d7d486fc5d986f) aangemaakt voor het loyaliteitssysteem. De controller had alleen een GET request om te testen of de API daadwerkelijk werkte. Ook heb ik de [integratie met EFCore](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9) werkend gekregen zodat het makkelijk is om een databasetabel aan te maken d.m.v. het ORM systeem. Het werkend krijgen van de EFCore verbinding met de database in Docker kostte het meeste tijd. Nadat dit was gelukt, kon ik het API overdragen naar mijn teamgenoten overdragen zodat zij de endpoints konden maken. Daarnaast heb ik ook het toevoegen van de loyaliteitspunten toegevoegd wanneer de Pitstop medewerker een onderhoudsbeurt voor een klant heeft gedaan.
+
+- [Back-end loyaliteitssysteem opzetten en toegevoegd aan Docker compose van Pitstop](https://github.com/hanaim-devops/pitstop-groep-d/issues/6)
+- [Initiële opzet van loyaliteitsAPI met eerste model en controller en opzet EFCore](https://github.com/hanaim-devops/pitstop-groep-d/commit/7f89efec6c880baf0b422d4da6d7d486fc5d986f)
+- [Toevoegen van loyaliteitspunten aan een klant in het loyaliteitssysteem na een onderhoudsbeurt](LINK TOEVOEGEN)
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 
 Het loyaliteitssysteem heb ik uiteindelijk met Pitstop geïntegreerd d.m.v. Docker compose als een aparte microservice. Hiervoor heb ik de [Dockerfile](https://github.com/hanaim-devops/pitstop-groep-d/blob/main/src/LoyaltySystemAPI/Dockerfile) en de [bestaande Docker Compose](https://github.com/hanaim-devops/pitstop-groep-d/commit/56685a7be8d0c2f21a9060435c8774e5a55801ed) van Pitstop aangepast zodat de Docker image op dezelfde manier als de andere bestaande microservices werd gebouwd. Het configureren duurde een stuk langer dan verwacht, voornamelijk omdat er toch [een aantal verschillen zaten bij de configuraties](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9) die ik samen met een teamgenoot een lange tijd niet zag.
+
+- [Dockerfile aangemaakt zodat het API van het loyaliteitssyseem op een Docker container kan draaien](https://github.com/hanaim-devops/pitstop-groep-d/blob/main/src/LoyaltySystemAPI/Dockerfile)
+- [Toevoegen van het loyaliteitssysteem aan Docker compose zodat het samen met de andere Pitstop containers draait](https://github.com/hanaim-devops/pitstop-groep-d/commit/56685a7be8d0c2f21a9060435c8774e5a55801ed)
+- [Configuratie binnen de applicatie zodat het uiteindelijk met docker compose werkt](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9)
 
 ## 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 
@@ -103,8 +111,6 @@ Dit is echter ook een valkuil tegelijk, want ik ben erg lang bezig geweest om Te
 ## 9. Conclusie & feedback
 
 Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algemener hoe je terugkijkt op het project. Geef wat constructieve feedback, tips aan docenten/beoordelaars e.d. En beschrijf wat je aan devops kennis, vaardigheden of andere zaken meeneemt naar je afstudeeropdracht of verdere loopbaan. 
-
-CDMM INVULLEN VOOR PROJECT MET TOELICHTING
 
 - Begin project was lastig om op te starten. Geen idee wat er moest gebeuren.
 - Helaas bij begin weinig met Kubernetes & Rancher gedaan, handig geweest om dit vanaf begin af aan te doen.

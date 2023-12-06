@@ -36,9 +36,8 @@ then
 fi
 
 kubectl apply \
-    -f ./ingress.yaml --kubeconfig=cg-4.yaml \
-    -f ./pv.yaml --kubeconfig=cg-4.yaml \
     -f ./pitstop-namespace$MESHPOSTFIX.yaml --kubeconfig=cg-4.yaml \
+    -f ./ingress.yaml --kubeconfig=cg-4.yaml \
     -f ./rabbitmq.yaml --kubeconfig=cg-4.yaml \
     -f ./logserver.yaml --kubeconfig=cg-4.yaml \
     -f ./sqlserver.yaml --kubeconfig=cg-4.yaml \
@@ -57,3 +56,5 @@ kubectl apply \
     -f ./node-exporter.yaml --kubeconfig=cg-4.yaml \
     -f ./grafana.yaml --kubeconfig=cg-4.yaml \
     -f ./influxdb.yaml --kubeconfig=cg-4.yaml
+
+$SHELL

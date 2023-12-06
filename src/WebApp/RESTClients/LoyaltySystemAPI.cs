@@ -1,55 +1,39 @@
-﻿using Pitstop.WebApp.RESTClients;
+﻿using System.Net.Http;
 
-namespace WebApp.RESTClients;
-
-public class LoyaltySystemAPI : ILoyaltySystemAPI
+namespace Pitstop.WebApp.RESTClients
 {
-    private ILoyaltySystemAPI _restClient;
-
-    public LoyaltySystemAPI(IConfiguration config, HttpClient httpClient)
+    public class LoyaltySystemAPI : ILoyaltySystemAPI
     {
-        string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("LoyaltySystemAPI");
-        httpClient.BaseAddress = new Uri($"http://{apiHostAndPort}/api");
-        _restClient = (ILoyaltySystemAPI)RestService.For<ILoyaltySystemAPI>(
-            httpClient,
-            new RefitSettings
-            {
-                ContentSerializer = new NewtonsoftJsonContentSerializer()
-            });
-    }
+        private readonly ILoyaltySystemAPI _restClient;
 
-    public async Task<List<Loyalty>> GetLoyalties()
-    {
-        return await _restClient.GetLoyalties();
-    }
-
-    public async Task<Loyalty> GetById([AliasAs("id")] string customerId)
-    {
-        try
+        public LoyaltySystemAPI(IConfiguration config, HttpClient httpClient)
         {
-            return await _restClient.GetById(customerId);
+            string apiHostAndPort = config.GetSection("APIServiceLocations").GetValue<string>("LoyaltySystemAPI");
+            httpClient.BaseAddress = new Uri($"http://{apiHostAndPort}/api");
+            _restClient = RestService.For<ILoyaltySystemAPI>(
+                httpClient,
+                new RefitSettings
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                });
         }
-        catch (ApiException ex)
+        public async Task<List<Loyalty>> GetLoyalties()
         {
-            if (ex.StatusCode == HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-            else
-            {
-                throw;
-            }
+            return await _restClient.GetLoyalties();
+        }
+        public async Task AddLoyaltyPoints([Body] AddLoyaltyPointsRequest addLoyaltyPointsRequest, AddLoyaltyPoints addLoyaltyPoints)
+        {
+            await _restClient.AddLoyaltyPoints(addLoyaltyPointsRequest, addLoyaltyPoints);
+        }
+
+        public Task<Loyalty> GetLoyaltyStatusFromCustomer([AliasAs("id")] string customerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RegisterCustomerToLoyaltySystem([Body] AddCustomerToLoyaltyRequest addCustomerToLoyaltyRequest, AddCustomerToLoyalty addCustomerToLoyalty)
+        {
+            await _restClient.RegisterCustomerToLoyaltySystem(addCustomerToLoyaltyRequest, addCustomerToLoyalty);
         }
     }
-
-    public async Task AddCustomer(AddCustomer command)
-    {
-        await _restClient.AddCustomer(command);
-    }
-
-    public async Task AddPoints(AddPoints command)
-    {
-        await _restClient.AddPoints(command);
-    }
-
 }
