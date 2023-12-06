@@ -7,7 +7,7 @@ public class Loyalty
     public string CustomerId { get; set; }
 
     [Display(Name = "Points")]
-    public string Points { get; set; }
+    public int Points { get; set; }
     [Display(Name = "Category")]
     public string Category { get; set; }
 }
