@@ -1,57 +1,68 @@
-Eigen bijdrage 
-Als deliverable voor de individuele bijdrage in het beroepsproduct maak een eigen markdown bestand <mijn-voornaam>.md in je repo aan met tekst inclusief linkjes naar code en documentaties bestanden, pull requests, commit diffs. Maak hierin de volgende kopjes met een invulling.
-
-Je schrapt verder deze tekst en vervangt alle andere template zaken, zodat alleen de kopjes over blijven. NB: Aanwezigheid van template teksten na inleveren ziet de beoordelaar als een teken dat je documentatie nog niet af is, en hij/zij deze dus niet kan of hoeft te beoordelen.
-
-Je begin hier onder het hoofdkopje met een samenvatting van je bijdrage zoals je die hieronder uitwerkt. Best aan het einde schrijven. Zorg voor een soft landing van de beoordelaar, maar dat deze ook direct een beeld krijgt. Je hoeft geen heel verslag te schrijven. De kopjes kunnen dan wat korter met wat bullet lijst met links voor 2 tot 4 zaken en 1 of 2 inleidende zinnen erboven. Een iets uitgebreidere eind conclusie schrijf je onder het laatste kopje.
+Eigen bijdrage Wijnand
 
 1. Code/platform bijdrage
 Competenties: DevOps-1 Continuous Delivery
 
-Beschrijf hier kort je bijdrage vanuit je rol, developer (Dev) of infrastructure specialist (Ops). Als Developer beschrijf en geef je links van minimaal 2 en maximaal 4 grootste bijdrages qua code functionaliteiten of non-functionele requirements. Idealiter werk je TDD (dus ook commit van tests en bijbehorende code tegelijk), maar je kunt ook linken naar geschreven automatische tests (unit tests, acceptance tests (BDD), integratie tests, end to end tests, performance/load tests, etc.). Als Opser geef je je minimaal 2 maximaal 4 belangrijkste bijdragen aan het opzetten van het Kubernetes platform, achterliggende netwerk infrastructuur of configuration management (MT) buiten Kubernetes (en punt 2).
+*  [endpoint gemaakt](https://github.com/hanaim-devops/pitstop-groep-d/commit/a45dfbb192f692feda96b4fd9a21ad9efff3238d) voor het toevoegen van punten loyaliteitspunten
+* updaten van [loyaliteitscategorie](https://github.com/hanaim-devops/pitstop-groep-d/commit/0abb5c16aba0afeb3a5382f7c1a8766b3f46ab1b)(goud platinu, zilver etc. ) gemaakt
+* database context/model aangepast met [testdata](https://github.com/hanaim-devops/pitstop-groep-d/commit/32ee9193d5ec19c82c4ae6d7f8947b3d20493fe5)
 
 2. Bijdrage app configuratie/containers/kubernetes
 Competenties: DevOps-2 Orchestration, Containerization
 
-Beschrijf en geef hier links naar je minimaal 2 en maximaal 4 grootste bijdragen qua configuratie, of bijdrage qua 12factor app of container Dockerfiles en/of .yml bestanden of vergelijkbare config (rondom containerization en orchestration).
+* [Dockercompose](https://github.com/hanaim-devops/pitstop-groep-d/commit/a45dfbb192f692feda96b4fd9a21ad9efff3238d#diff-cd2ae9f5a501d16253a461b919af1523e71916a984989885e6783203f4ee252a) aangepast zodat het voor iedereen werkt
+* Pair programming met kachung (op teams) met swagger werkend krijgen aan de [compose](https://github.com/hanaim-devops/pitstop-groep-d/commit/582a026231a8409d1e5eefd606f223c8bc6143b9)
+* Pair programming met kachung (op teams) met het aanmaken van de [dockerfile](https://github.com/hanaim-devops/pitstop-groep-d/commit/8674df0136d60ecd385189520f1f8263a13d9f98#diff-cb6b266a811dad75d8aade91c35ac0ffa96618e0005ef2f14fab33170f318b94)
 
 3. Bijdrage versiebeheer, CI/CD pipeline en/of monitoring
 Competenties: DevOps-1 - Continuous Delivery, DevOps-3 GitOps, DevOps-5 - SlackOps
 
-Beschrijf hier en geef links naar je bijdragen aan het opzetten en verder automatiseren van delivery pipeline, GitOps toepassing en/of het opzetten van monitoring, toevoegen van metrics en custom metrics en rapportages.
-
-NB Het gebruik van versiebeheer ((e.g. git)) hoort bij je standaardtaken en deze hoef je onder dit punt NIET te beschrijven, het gaat hier vooral om documenteren van processtandaarden, zoals toepassen van een pull model.
 
 4. Onderzoek
 Competenties: Nieuwsgierige houding
 
-Beschrijf hier voor het Course BP kort je onderzochte technologie met een link naar je blog post, of het toepassen ervan gelukt is en hoe, of waarom niet. Beschrijf evt. kort extra leerervaringen met andere technologieen of verdieping sinds het blog.
-
-Tijdens het grote project beschrijf je hier onderzoek naar het domein en nieuwe onderzochte/gebruikte DevOps technologieën. Wellicht heb je nogmaals de voor blog onderzochte technologie kunnen toepassen in een andere context. Verder heb je nu een complex domein waar je in moet verdiepen en uitvragen bij de opdrachtgever. Link bijvoorbeeld naar repo's met POC's of, domein modellen of beschrijf andere onderwerpen en link naar gebruikte bronnen.
-
-Als de tijdens course onderzochte technologie wel toepasbaar is kun je dit uiteraard onder dit punt noemen. Of wellicht was door een teamgenoot onderzochte technologie relevant, waar jij je nu verder in verdiept hebt en mee gewerkt hebt, dus hier kunt beschrijven. Tot slot kun je hier ook juist een korte uitleg geef over WAAROM jouw eerder onderzochte technologie dan precies niet relevant of inpasbaar was. Dit is voor een naieve buitenstaander niet altijd meteen duidelijk, maar kan ook heel interessant zijn. Bijvoorbeeld dat gebruik van Ansible in combi met Kubernetes niet handig blijkt. Ook als je geen uitgebreid onderzoek hebt gedaan of ADR hebt waar je naar kunt linken, dan kun je onder dit kopje wel alsnog kort conceptuele kennis duidelijk maken.
+Mijn onderzochte technologie is trivy. Trivy. Hier heb ik een [blogpost](https://github.com/hanaim-devops/onderzoekWijnandvZyl#waarom-zouden-developers-container-scanning-en-devsecops-willen-toepassen) over geschreven. Dit heb ik ook toegepast op ons beroepsproduct. Trivy scanned de dockerimages op vulnerabilities zodat de developer deze kan oplossen mits dat mogelijk is. In het bestandje [containerscanning.md](https://github.com/hanaim-devops/pitstop-groep-d/blob/main/containerscanning/containerscanning.md) kun je lezen over wat de resultaten zijn en hoe je het kan oplossen.
 
 5. Bijdrage code review/kwaliteit anderen en security
 Competenties: DevOps-7 - Attitude, DevOps-4 DevSecOps
 
-Beschrijf hier en geef links naar de minimaal 2 en maximaal 4 grootste review acties die je gedaan hebt, bijvoorbeeld pull requests incl. opmerkingen. Het interessantst zijn natuurlijk gevallen waar code niet optimaal was. Zorg dat je minstens een aantal reviews hebt waar in gitlab voor een externe de kwestie ook duidelijk is, in plaats van dat je dit altijd mondeling binnen het team oplost.
+* [Unit tests](https://github.com/hanaim-devops/pitstop-groep-d/commit/65609be80a9cd4c74898ac0ad9df6f9ec07f94cb) voor de eerste 2 endpoints gemaakt
+* [Unit tests](https://github.com/hanaim-devops/pitstop-groep-d/commit/51e97679c3c6aa73c22a41745c41d7a672564b15) voor de overige 2 endpoints gemaakt
+* [Containerscanner](https://github.com/hanaim-devops/pitstop-groep-d/commit/9e0de7005e0b128f35b3f5ae5c59748acca2c7d5) gemaakt voor de security van docker images
 
 6. Bijdrage documentatie
 Competenties: DevOps-6 Onderzoek
-
-Zet hier een links naar en geef beschrijving van je C4 diagram of diagrammen, README of andere markdown bestanden, ADR's of andere documentatie. Bij andere markdown bestanden of doumentatie kun je denken aan eigen proces documentatie, zoals code standaarden, commit- of branchingconventies. Tot slot ook user stories en acceptatiecriteria (hopelijk verwerkt in gitlab issues en vertaalt naar .feature files) en evt. noemen en verwijzen naar handmatige test scripts/documenten.
+ 
+ * Soort [readme](https://github.com/hanaim-devops/pitstop-groep-d/blob/main/containerscanning/containerscanning.md) geschreven voor containerscanning
+ * [ADR](https://github.com/hanaim-devops/pitstop-groep-d/commit/e1401a0b7a857862bf9ab431b4bc279855ff7fd4) gemaakt voor containerscanning
+ * Readme [aangepast](https://github.com/hanaim-devops/pitstop-groep-d/commit/83c5e9b420c5cd4dfef1d3ea45645c097cafce71)
 
 7. Bijdrage Agile werken, groepsproces en communicatie opdrachtgever en soft skills
 Competenties: DevOps-1 - Continuous Delivery, Agile
 
-Beschrijf hier minimaal 2 en maximaal 4 situaties van je inbreng en rol tijdens Scrum ceremonies. Beschrijf ook feedback of interventies tijdens Scrum meetings, zoals sprint planning of retrospective die je aan groespgenoten hebt gegeven.
-
-Beschrijf tijdens het project onder dit kopje ook evt. verdere activiteiten rondom communicatie met de opdrachtgever of domein experts, of andere meer 'professional skills' of 'soft skilss' achtige zaken.
+We hebben dagelijks een DSU gehouden om te kijken wat iedereen gedaan heeft en wat iedereen gaat doen. Als we thuis werkten doen we dit ook nog een keer na of voor de middagpauze en aan het einde van de dag. Dit doen we zodat iedereen op de hoogte is van wat iedereen aan het doen is en gaan we niet toevallig de zelfde functionaliteiten maken. Tijdens de DSU'S updaten we ook het sprintbord en eventueel backlog. 
 
 8. Leerervaringen
 Competenties: DevOps-7 - Attitude
 
-Geef tot slot hier voor jezelf minimaal 2 en maximaal 4 tops en 2 dito (2 tot 4) tips á la professional skills die je kunt meenemen in je verdere loopbaan. Beschrijf ook de voor jezelf er het meest uitspringende hulp of feedback van groepsgenoten die je (tot dusver) hebt gehad tijdens het project.
+Tops:
+
+* Backend gemaakt met een nieuwe taal (Dotnet / c#)
+* Optijd gelukt om onderzochte functionaliteit toe te voegen.
+* Goede inzet bij pair programming
+
+Tips: 
+
+* Eerder aan de bel trekken als ik vastloop
+* Gezamelijk better inplannen
+
 
 9. Conclusie & feedback
-Schrijf een conclusie van al bovenstaande punten. En beschrijf dan ook wat algemener hoe je terugkijkt op het project. Geef wat constructieve feedback, tips aan docenten/beoordelaars e.d. En beschrijf wat je aan devops kennis, vaardigheden of andere zaken meeneemt naar je afstudeeropdracht of verdere loopbaan.
+
+Het was een leerzaam "Project" ik heb nu een beetje een basis begrip van hoe dotnet werkt en hoe je hiermee moet unittesten. Wel was het vooral aan het begin nogal onduidelijk wat precies de bedoeling was. Het project werd ook een stuk minder leuk doordat je in je factsheet alles moet kunnen aantonen. Hierdoor moest je opeens stoppen met het werken aan je product terwijl je net lekker bezig was om vervolgens iets anders te doen waar je nog niks van snapt. Dit was totaal niet efficient en versloomde ook onze progressie.
+
+Ook hadden we de opdracht iets makkelijker ingeschat ook omdat de het juist zo vaag was waardoor we niet voldoende hebben opgeleverd tijdens de eerste oplevering. 
+
+Als laatste wat het ook niet prettig om een willekeurige applicatie uit te breiden. Hierdoor moest je veel tijd stoppen in hoe de applicatie in elkaar zat. Het hielp ook niet dat de applicatie zelf geen documentatie had over hoe die in elkaar zit en hoe het werkt. Er werd alleen maar beschreven hoe je hem opstart waar je niet heel veel aan hebt als je de applicatie moet uitbreiden. Als je normaal gesproken een applicatie moet uitbreiden als developer is het wel de norm dat hier documentatie voor is.
+
+Kort samengevat: Het beroepsproduct was een goed concept maar de opdracht mag beter geformuleerd worden en moet er uitgebreide documentatie komen voor het originele product om dit een goeie opdracht te maken!
