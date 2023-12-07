@@ -9,7 +9,7 @@ Voor code heb ik voornamelijk aan [de back-end van het loyaliteitssysteem](https
 - [Back-end loyaliteitssysteem opzetten en toegevoegd aan Docker compose van Pitstop](https://github.com/hanaim-devops/pitstop-groep-d/issues/6)
 - [Initiële opzet van loyaliteitsAPI met eerste model en controller en opzet EFCore](https://github.com/hanaim-devops/pitstop-groep-d/commit/7f89efec6c880baf0b422d4da6d7d486fc5d986f)
 - [Toevoegen van loyaliteitspunten aan een klant in het loyaliteitssysteem na een onderhoudsbeurt](https://github.com/hanaim-devops/pitstop-groep-d/commit/09784094d0778c4dd9efcf037f0eb3800ff60a95)
-- [Aanpassen van het loyaliteitsoverzicht zodat het de klantnaam weergeeft i.p.v. de klantid, en aflopend sorteren van loyaliteitspunten](https://github.com/hanaim-devops/pitstop-groep-d/commit/9dcc8d7697fc043394eaec197dedb973f317e431)
+- [Aanpassen van het loyaliteitsoverzicht zodat het de klantnaam weergeeft i.p.v. de klantid, en aflopend sorteren van loyaliteitspunten](https://github.com/hanaim-devops/pitstop-groep-d/commit/9dcc8d7697fc043394eaec197dedb973f317e431). Belangrijkste hierbij is het gebruik van een bovenliggende Viewmodel dat de viewmodels van Customers en Loyalty gebruikt.
 
 ## 2. Bijdrage app configuratie/containers/kubernetes
 

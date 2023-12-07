@@ -5,19 +5,18 @@ namespace LoyaltySystemAPI.Models
 {
     public class LoyaltyContext : DbContext
     {
-        public DbSet<Loyalty> Loyalties{ get; set; }
-      public string DbPath { get; }
+        public DbSet<Loyalty> Loyalties { get; set; }
 
-public LoyaltyContext(DbContextOptions<LoyaltyContext> options, string dbPath) : base(options)
-{
-    DbPath = dbPath ?? throw new ArgumentNullException(nameof(dbPath));
-}
+        public LoyaltyContext(DbContextOptions<LoyaltyContext> options) : base(options)
+        {
+
+        }
 
 
         public LoyaltyContext() : base()
-    {
-       
-    }
+        {
+
+        }
 
 
 
@@ -33,7 +32,7 @@ public LoyaltyContext(DbContextOptions<LoyaltyContext> options, string dbPath) :
             builder.Entity<Loyalty>().HasData(
                 new Loyalty { CustomerID = "1", Points = "100", Category = "zilver" },
                 new Loyalty { CustomerID = "2", Points = "200", Category = "zilver" },
-                new Loyalty { CustomerID = "3", Points = "2000", Category ="platina" },
+                new Loyalty { CustomerID = "3", Points = "2000", Category = "platina" },
                 new Loyalty { CustomerID = "4", Points = "600", Category = "goud" },
                 new Loyalty { CustomerID = "5", Points = "800", Category = "goud" },
                 new Loyalty { CustomerID = "6", Points = "750", Category = "goud" },

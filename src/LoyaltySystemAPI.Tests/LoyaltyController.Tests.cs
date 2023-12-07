@@ -1,15 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using LoyaltySystemAPI.Controllers;
 using LoyaltySystemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using Xunit;
+using Pitstop.WebApp.Models;
+
 public class LoyaltyControllerTests
 {
-   [Fact]
+    [Fact]
     public async Task Get_ReturnsListOfLoyalties()
     {
         // Arrange
@@ -17,7 +14,7 @@ public class LoyaltyControllerTests
             .UseInMemoryDatabase(databaseName: "TestDatabase")
             .Options;
 
-        using (var mockContext = new LoyaltyContext(options, "your_db_path"))
+        using (var mockContext = new LoyaltyContext(options))
         {
             mockContext.Loyalties.AddRange(new List<Loyalty>
             {
@@ -36,7 +33,7 @@ public class LoyaltyControllerTests
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var items = Assert.IsType<List<Loyalty>>(okResult.Value);
-            Assert.Equal(4, items.Count);
+            Assert.Equal(4, items.Count); // Adjust to the expected count
         }
     }
 
@@ -47,19 +44,25 @@ public class LoyaltyControllerTests
         var options = new DbContextOptionsBuilder<LoyaltyContext>()
             .UseInMemoryDatabase(databaseName: "TestDatabase")
             .Options;
-        var mockContext =new LoyaltyContext(options, "your_db_path"); 
-        var controller = new LoyaltyController(mockContext);
-        var customerId = "1";
+        using (var mockContext = new LoyaltyContext(options))
+        {
+            mockContext.Loyalties.Add(new Loyalty { CustomerID = "6", Points = "100", Category = "Zilver" });
+            mockContext.SaveChanges();
 
-        // Act
-        var result = await controller.Get(customerId);
+            var controller = new LoyaltyController(mockContext);
+            var customerId = "6";
 
-        // Assert
-        var okResult = Assert.IsType<OkObjectResult>(result);
-        var loyalty = Assert.IsType<Loyalty>(okResult.Value);
-        Assert.Equal(customerId, loyalty.CustomerID);
+            // Act
+            var result = await controller.Get(customerId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var loyalty = Assert.IsType<Loyalty>(okResult.Value);
+            Assert.Equal(customerId, loyalty.CustomerID);
+        }
     }
-     [Fact]
+
+    [Fact]
     public async Task AddPoints_ReturnsOkResult()
     {
         // Arrange
@@ -67,7 +70,7 @@ public class LoyaltyControllerTests
             .UseInMemoryDatabase(databaseName: "TestDatabase")
             .Options;
 
-        using (var mockContext = new LoyaltyContext(options, "your_db_path"))
+        using (var mockContext = new LoyaltyContext(options))
         {
             mockContext.Loyalties.Add(new Loyalty { CustomerID = "5", Points = "100", Category = "Zilver" });
             mockContext.SaveChanges();
@@ -75,14 +78,23 @@ public class LoyaltyControllerTests
             var controller = new LoyaltyController(mockContext);
             var customerId = "5";
             var pointsToAdd = 50;
+            var loyaltyrequest = new AddLoyaltyPointsRequest
+            {
+                CustomerId = customerId,
+                LoyaltyPoints = pointsToAdd
+            };
 
             // Act
-            var result = await controller.AddPoints(customerId, pointsToAdd);
+            var result = await controller.AddPoints(loyaltyrequest);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var message = Assert.IsType<string>(okResult.Value);
             Assert.Contains(customerId, message);
+
+            // Check data consistency
+            var updatedLoyalty = mockContext.Loyalties.Find(customerId);
+            Assert.Equal("150", updatedLoyalty.Points); // Adjust to the expected value
         }
     }
 
@@ -94,7 +106,7 @@ public class LoyaltyControllerTests
             .UseInMemoryDatabase(databaseName: "TestDatabase")
             .Options;
 
-        using (var mockContext = new LoyaltyContext(options, "your_db_path"))
+        using (var mockContext = new LoyaltyContext(options))
         {
             var controller = new LoyaltyController(mockContext);
             var customerDto = new CustomerDto { CustomerID = "4" };
@@ -106,6 +118,10 @@ public class LoyaltyControllerTests
             var okResult = Assert.IsType<OkObjectResult>(result);
             var message = Assert.IsType<string>(okResult.Value);
             Assert.Contains(customerDto.CustomerID, message);
+
+            // Check data consistency
+            var addedCustomer = mockContext.Loyalties.Find(customerDto.CustomerID);
+            Assert.NotNull(addedCustomer);
         }
     }
 }
