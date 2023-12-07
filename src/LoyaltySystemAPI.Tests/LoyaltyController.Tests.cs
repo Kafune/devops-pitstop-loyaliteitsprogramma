@@ -6,6 +6,7 @@ using LoyaltySystemAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using Pitstop.WebApp.Models;
 using Xunit;
 public class LoyaltyControllerTests
 {
@@ -67,6 +68,7 @@ public class LoyaltyControllerTests
             .UseInMemoryDatabase(databaseName: "TestDatabase")
             .Options;
 
+        
         using (var mockContext = new LoyaltyContext(options, "your_db_path"))
         {
             mockContext.Loyalties.Add(new Loyalty { CustomerID = "5", Points = "100", Category = "Zilver" });
@@ -75,9 +77,12 @@ public class LoyaltyControllerTests
             var controller = new LoyaltyController(mockContext);
             var customerId = "5";
             var pointsToAdd = 50;
+            var loyaltyrequest = new AddLoyaltyPointsRequest();
+            loyaltyrequest.CustomerId = customerId;
+            loyaltyrequest.LoyaltyPoints = pointsToAdd;
 
             // Act
-            var result = await controller.AddPoints(customerId, pointsToAdd);
+            var result = await controller.AddPoints(loyaltyrequest);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
