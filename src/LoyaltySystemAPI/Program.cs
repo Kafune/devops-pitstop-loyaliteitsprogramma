@@ -26,6 +26,12 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "LoyaltyProgram API - v1");
 });
 
+// auto migrate db
+using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    scope.ServiceProvider.GetService<LoyaltyContext>().MigrateDB();
+}
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
