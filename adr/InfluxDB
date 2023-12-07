@@ -1,0 +1,17 @@
+# InfluxDB ADR
+
+## Status
+
+Completed
+
+## Context
+
+Er dient een implementatie gedaan te worden van InfluxDB om timeseries data op te slaan en daarover te rapporteren om op die manier interessante informatie over het systeem te krijgen
+
+## Decision
+
+Het opzetten van de database is voltooit en draait als docker container. Het vervolgens toevoegen van de data is niet gelukt. Om toch iets te kunnen laten zien heb ik nu een dashboard met grafieken over de data van influxDB container zelf. 
+
+## Consequences
+
+De eind implementatie is niet volledig naar wens gelukt maar het is niet helemaal mislukt.
