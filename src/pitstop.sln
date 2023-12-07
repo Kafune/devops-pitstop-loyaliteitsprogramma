@@ -25,9 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeService", "TimeService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{A0ACF2B6-E083-45E6-A0CA-6E7475B5E7AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltySystemAPI", "LoyaltySystemAPI\LoyaltySystemAPI.csproj", "{06FC3D08-BCF0-4BE5-A163-50AD4DF9A99E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoyaltySystemAPI", "LoyaltySystemAPI\LoyaltySystemAPI.csproj", "{06FC3D08-BCF0-4BE5-A163-50AD4DF9A99E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtils", "TestUtils\TestUtils.csproj", "{7DD16742-A87F-44A1-97D7-1105BBE21F36}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoyaltySystemAPI.Tests", "LoyaltySystemAPI.Tests\LoyaltySystemAPI.Tests.csproj", "{405C4ECE-D359-402D-BFF6-74383C603959}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{7DD16742-A87F-44A1-97D7-1105BBE21F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD16742-A87F-44A1-97D7-1105BBE21F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD16742-A87F-44A1-97D7-1105BBE21F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{405C4ECE-D359-402D-BFF6-74383C603959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405C4ECE-D359-402D-BFF6-74383C603959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405C4ECE-D359-402D-BFF6-74383C603959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405C4ECE-D359-402D-BFF6-74383C603959}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

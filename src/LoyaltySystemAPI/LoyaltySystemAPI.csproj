@@ -22,6 +22,7 @@
     <PackageReference Include="Polly" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="xunit" Version="2.6.2" />
+	<InternalsVisibleTo Include="LoyaltySystemAPI.Tests" />
   </ItemGroup>
 
   <ItemGroup>
