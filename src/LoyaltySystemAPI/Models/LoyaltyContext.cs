@@ -6,7 +6,6 @@ namespace LoyaltySystemAPI.Models
     public class LoyaltyContext : DbContext
     {
         public DbSet<Loyalty> Loyalties { get; set; }
-        public string DbPath { get; }
 
         public LoyaltyContext(DbContextOptions<LoyaltyContext> options) : base(options)
         {
